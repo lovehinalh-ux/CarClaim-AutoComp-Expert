@@ -1,60 +1,52 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>車禍求償小幫手 - 賠償清單試算工具</title>
-    
+    <title>2026 車子求償一覽表 | 專業級損害賠償試算工具</title>
+    <meta name="description" content="由專業顧問開發，提供最新的車禍求償清單，涵蓋折舊、交通費及醫療損失，一鍵生成專業 PDF。">
+
     <!-- Open Graph / Social Sharing -->
-    <meta property="og:title" content="車禍求償小幫手 - 賠償清單試算工具">
-    <meta property="og:description" content="專業級車禍賠償計算器，涵蓋醫療費、薪資損失、財產損失，並可一鍵匯出專業 PDF 求償清單。">
+    <meta property="og:title" content="2026 車子求償一覽表 | 專業級損害賠償試算工具">
+    <meta property="og:description" content="由專業顧問開發，提供最新的車禍求償清單，涵蓋折舊、交通費及醫療損失，一鍵生成專業 PDF。">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://img.icons8.com/fluency/240/calculator.png">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+
     <style>
+        :root {
+            --brand-gold: #B8860B;
+            --soft-bg: #FDFBF7;
+        }
+
         body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: #f8fafc;
-        }
-        /* Custom scrollbar for better aesthetics */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-        
-        /* PDF specific tweaks for html2pdf rendering */
-        .pdf-content {
-            background: white;
-            width: 210mm;
-            min-height: 297mm;
-            margin: 0 auto;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--soft-bg);
+            color: #333;
+            line-height: 1.6;
         }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "html2pdf.js": "https://esm.sh/html2pdf.js@0.10.1"
-  }
-}
-</script>
+
+    <script type="module" src="/index.tsx"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "車子求償一覽表工具",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+      "description": "2026 最新車禍理賠試算工具，包含折舊損害與薪資損失計算。"
+    }
+    </script>
 </head>
+
 <body>
     <div id="root"></div>
 </body>
+
 </html>

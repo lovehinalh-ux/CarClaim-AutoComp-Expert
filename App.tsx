@@ -10,6 +10,7 @@ import PDFPreview from './components/PDFPreview';
 import { CategoryType, ClaimItem, FormState, MedicalEntry } from './types';
 import { INITIAL_ITEMS, INITIAL_MEDICAL_ENTRIES } from './constants';
 import { Download, Calculator, User, Calendar, ClipboardList, Stethoscope, Eye, AlertCircle, Trash2, ArrowLeft } from 'lucide-react';
+import SEO from './components/SEO';
 
 type ViewMode = 'landing' | 'summary' | 'medical' | 'preview';
 
@@ -140,26 +141,27 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen pb-40 bg-slate-50">
+      <SEO />
       <div className="no-print">
         <Header />
       </div>
-      
+
       <main className="max-w-4xl mx-auto px-4">
         {/* Navigation Tabs (Mobile-friendly) */}
         <div className="flex bg-slate-200/50 p-1 rounded-xl mb-8 no-print shadow-inner">
-          <button 
+          <button
             onClick={() => navigateTo('summary')}
             className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-bold transition-all ${viewMode === 'summary' ? 'bg-white shadow text-blue-700' : 'text-slate-600 hover:bg-white/50'}`}
           >
             <ClipboardList size={18} /> 求償一覽表
           </button>
-          <button 
+          <button
             onClick={() => navigateTo('medical')}
             className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-bold transition-all ${viewMode === 'medical' ? 'bg-white shadow text-blue-700' : 'text-slate-600 hover:bg-white/50'}`}
           >
             <Stethoscope size={18} /> 醫療明細試算
           </button>
-          <button 
+          <button
             onClick={() => navigateTo('preview')}
             className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-bold transition-all ${viewMode === 'preview' ? 'bg-white shadow text-blue-700' : 'text-slate-600 hover:bg-white/50'}`}
           >
@@ -174,7 +176,7 @@ const App: React.FC = () => {
               <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
                 <User size={20} className="text-blue-600" /> 基本資訊與項目填寫
               </h2>
-              <button 
+              <button
                 onClick={handleReset}
                 className="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors font-bold border border-red-100 shadow-sm"
               >
@@ -227,7 +229,7 @@ const App: React.FC = () => {
 
             {/* Quick Actions */}
             <div className="flex justify-end no-print">
-              <button 
+              <button
                 onClick={() => navigateTo('medical')}
                 className="text-blue-600 hover:text-blue-800 text-sm font-bold flex items-center gap-1 group bg-blue-50/50 px-3 py-1.5 rounded-lg border border-blue-100 transition-colors"
               >
@@ -248,7 +250,7 @@ const App: React.FC = () => {
             ))}
 
             <Disclaimer />
-            
+
             <div className="no-print">
               <ProfileCard />
             </div>
@@ -257,7 +259,7 @@ const App: React.FC = () => {
 
         {viewMode === 'medical' && (
           <div className="animate-in slide-in-from-right-4 duration-300">
-            <MedicalDetailsTable 
+            <MedicalDetailsTable
               entries={formState.medicalEntries}
               onEntryChange={handleMedicalEntryChange}
               onAddRow={handleAddMedicalRow}
@@ -272,7 +274,7 @@ const App: React.FC = () => {
 
         {viewMode === 'preview' && (
           <div className="pb-10">
-            <PDFPreview 
+            <PDFPreview
               claimantName={formState.claimantName}
               accidentDate={formState.accidentDate}
               items={formState.items}
@@ -317,7 +319,7 @@ const App: React.FC = () => {
             {viewMode === 'summary' ? (
               <button
                 onClick={() => navigateTo('preview')}
-                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-blue-200"
+                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[#B8860B] hover:bg-[#8B4513] text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-orange-200"
               >
                 <Eye size={20} /> 生成預覽並輸出
               </button>
@@ -338,7 +340,7 @@ const App: React.FC = () => {
                 </button>
                 <button
                   onClick={handleExportPDF}
-                  className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-blue-200"
+                  className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[#B8860B] hover:bg-[#8B4513] text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-orange-200"
                 >
                   <Download size={20} /> 確認輸出 PDF
                 </button>

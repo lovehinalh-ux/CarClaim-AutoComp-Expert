@@ -20,7 +20,7 @@ const MedicalDetailsTable: React.FC<Props> = ({ entries, onEntryChange, onAddRow
     if (input && 'showPicker' in HTMLInputElement.prototype) {
       try {
         input.showPicker();
-      } catch (e) {
+      } catch {
         input.focus();
       }
     } else if (input) {
@@ -32,7 +32,7 @@ const MedicalDetailsTable: React.FC<Props> = ({ entries, onEntryChange, onAddRow
     <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
       <div className="bg-slate-800 p-6 flex items-center justify-between text-white">
         <div className="flex items-center gap-4">
-          <button 
+          <button
             onClick={onBack}
             className="p-2 hover:bg-slate-700 rounded-full transition-colors"
             title="返回一覽表"
@@ -78,11 +78,10 @@ const MedicalDetailsTable: React.FC<Props> = ({ entries, onEntryChange, onAddRow
                         <input
                           id={`date-input-${entry.id}`}
                           type="date"
-                          className={`w-full border rounded-lg pl-11 pr-3 py-2 text-slate-700 focus:outline-none transition-all cursor-pointer shadow-sm ${
-                            dateMissing 
-                              ? 'border-red-300 bg-red-50 focus:ring-2 focus:ring-red-500' 
+                          className={`w-full border rounded-lg pl-11 pr-3 py-2 text-slate-700 focus:outline-none transition-all cursor-pointer shadow-sm ${dateMissing
+                              ? 'border-red-300 bg-red-50 focus:ring-2 focus:ring-red-500'
                               : 'bg-white border-slate-200 focus:ring-2 focus:ring-blue-500 hover:border-slate-300'
-                          }`}
+                            }`}
                           value={entry.date}
                           onChange={(e) => onEntryChange(entry.id, 'date', e.target.value)}
                         />
@@ -100,11 +99,10 @@ const MedicalDetailsTable: React.FC<Props> = ({ entries, onEntryChange, onAddRow
                         type="number"
                         min="0"
                         placeholder="0"
-                        className={`w-full border rounded-lg px-4 py-2 text-right font-medium shadow-sm transition-all focus:outline-none ${
-                          amountInvalid 
-                            ? 'border-red-300 bg-red-50 text-red-800 focus:ring-2 focus:ring-red-500' 
+                        className={`w-full border rounded-lg px-4 py-2 text-right font-medium shadow-sm transition-all focus:outline-none ${amountInvalid
+                            ? 'border-red-300 bg-red-50 text-red-800 focus:ring-2 focus:ring-red-500'
                             : 'bg-white border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500 hover:border-slate-300'
-                        }`}
+                          }`}
                         value={entry.amount || ''}
                         onChange={(e) => onEntryChange(entry.id, 'amount', parseFloat(e.target.value) || 0)}
                       />
@@ -116,7 +114,7 @@ const MedicalDetailsTable: React.FC<Props> = ({ entries, onEntryChange, onAddRow
                     </div>
                   </td>
                   <td className="px-6 py-4 text-center">
-                    <button 
+                    <button
                       onClick={() => onRemoveRow(entry.id)}
                       className="text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-full transition-all p-2"
                       title="刪除此列"

@@ -15,9 +15,9 @@ const PreviewLanding: React.FC<Props> = ({ onStart }) => {
           <div className="absolute top-0 right-0 p-4 opacity-10">
             <Calculator size={120} />
           </div>
-          <h1 className="text-3xl md:text-4xl font-black mb-3 relative z-10">車禍求償小幫手</h1>
+          <h1 className="text-3xl md:text-4xl font-black mb-3 relative z-10 font-serif">車禍求償小幫手</h1>
           <p className="text-blue-100 text-lg font-medium opacity-90 relative z-10">
-            專業級賠償清單試算與 PDF 匯出工具
+            結合科技試算與專家實務經驗，為您爭取應有的權益
           </p>
         </div>
 
@@ -34,11 +34,11 @@ const PreviewLanding: React.FC<Props> = ({ onStart }) => {
             </div>
             <div className="flex gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100">
               <div className="bg-indigo-100 p-3 rounded-xl text-indigo-600 shrink-0">
-                <FileText size={24} />
+                <ShieldCheck size={24} />
               </div>
               <div>
-                <h3 className="font-bold text-slate-800">專業輸出</h3>
-                <p className="text-sm text-slate-500">一鍵生成 PDF 格式清單，方便談判理賠。</p>
+                <h3 className="font-bold text-slate-800 font-serif">專家把關</h3>
+                <p className="text-sm text-slate-500">內建 2026 最新法規數據與實務建議。</p>
               </div>
             </div>
           </div>
@@ -64,13 +64,13 @@ const PreviewLanding: React.FC<Props> = ({ onStart }) => {
           >
             立即開始試算 <ArrowRight className="group-hover:translate-x-1 transition-transform" />
           </button>
-          
+
           <p className="text-center text-slate-400 text-xs mt-6">
             本工具僅供試算參考，具體請求請諮詢法律專業人士
           </p>
         </div>
       </div>
-      
+
       <div className="mt-8 text-slate-400 text-sm font-medium">
         © {new Date().getFullYear()} 車禍求償小幫手
       </div>

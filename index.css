@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@layer base {
+    :root {
+        /* Brand Colors - Authoritative & Warm */
+        --color-brand-primary: #1e3a8a;
+        /* Deep Royal Blue */
+        --color-brand-secondary: #ea580c;
+        /* Warm Orange for CTAs */
+        /* Warm off-white (Alabaster) */
+        --color-brand-gold: #B8860B;
+        /* Business Gold */
+        --color-brand-gold-light: #F5F5DC;
+        /* Premium Beige */
+    }
+
+    body {
+        font-family: 'Noto Serif TC', serif;
+        /* Switch to Serif for headings */
+        background-color: var(--color-brand-surface);
+        color: #1e293b;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Noto Serif TC', serif;
+        font-weight: 700;
+    }
+
+    p,
+    input,
+    button,
+    label {
+        font-family: 'Noto Sans TC', sans-serif;
+        /* Keep Sans for UI elements */
+    }
+}
+
+/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* PDF specific tweaks for html2pdf rendering */
+/* PDF specific tweaks for html2pdf rendering */
+.pdf-content {
+    background: white;
+    width: 210mm;
+    /* A4 width */
+    min-height: 297mm;
+    /* A4 height */
+    margin: 0 auto;
+    font-size: 14px;
+    /* Slightly smaller font */
+}

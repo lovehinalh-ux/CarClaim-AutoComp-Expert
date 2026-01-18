@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { CategoryType, ClaimItem } from '../types';
-import { Info, HelpCircle, AlertCircle } from 'lucide-react';
+import { HelpCircle, AlertCircle } from 'lucide-react';
+import ExpertTip from './ExpertTip';
 
 interface Props {
   category: CategoryType;
@@ -38,6 +39,11 @@ const ClaimCategorySection: React.FC<Props> = ({ category, items, onAmountChange
                   <p className="text-sm text-slate-500 hidden md:block">
                     {item.hint}
                   </p>
+
+                  {/* Expert Authority Integration */}
+                  {item.description && item.description.length > 20 && (
+                    <ExpertTip content={item.description} />
+                  )}
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <div className="flex items-center gap-3">
@@ -45,11 +51,10 @@ const ClaimCategorySection: React.FC<Props> = ({ category, items, onAmountChange
                     <input
                       type="number"
                       min="0"
-                      className={`w-full md:w-48 bg-white border rounded-lg px-4 py-2 text-right font-medium focus:outline-none transition-all ${
-                        hasError 
-                          ? 'border-red-300 text-red-800 focus:ring-2 focus:ring-red-500' 
-                          : 'border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500'
-                      }`}
+                      className={`w-full md:w-48 bg-white border rounded-lg px-4 py-2 text-right font-medium focus:outline-none transition-all ${hasError
+                        ? 'border-red-300 text-red-800 focus:ring-2 focus:ring-red-500'
+                        : 'border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500'
+                        }`}
                       placeholder="0"
                       value={item.amount || ''}
                       onChange={(e) => onAmountChange(item.id, parseFloat(e.target.value))}

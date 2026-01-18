@@ -1,8 +1,7 @@
 
 import React, { useRef, useState } from 'react';
 import { ClaimItem, CategoryType } from '../types';
-import { ChevronLeft, Printer, FileText, ArrowLeft, Download, Loader2 } from 'lucide-react';
-// @ts-ignore
+import { Printer, FileText, ArrowLeft, Download, Loader2 } from 'lucide-react';
 import html2pdf from 'html2pdf.js';
 
 interface Props {
@@ -17,24 +16,25 @@ interface Props {
 const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, totalAmount, onBack, onPrint }) => {
   const pdfRef = useRef<HTMLDivElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  
+
   const activeItems = items.filter(item => item.amount > 0);
   const categories = Object.values(CategoryType);
 
   const handleDownloadPDF = async () => {
     if (!pdfRef.current) return;
-    
+
     setIsGenerating(true);
-    
+
     const element = pdfRef.current;
     const opt = {
       margin: 10,
       filename: `車禍求償清單_${claimantName || '未命名'}_${new Date().toISOString().split('T')[0]}.pdf`,
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { 
-        scale: 2, 
+      html2canvas: {
+        scale: 2, // Keep quality high
         useCORS: true,
-        letterRendering: true
+        letterRendering: true,
+        scrollY: 0,
       },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
@@ -58,14 +58,14 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, totalA
             <Loader2 className="w-12 h-12 text-blue-600 animate-spin mx-auto mb-4" />
             <h3 className="text-xl font-bold text-slate-800 mb-2">正在產製專業 PDF</h3>
             <p className="text-slate-500 text-sm leading-relaxed">
-              請稍候，系統正在為您排版並優化文件畫質...<br/>這可能需要幾秒鐘的時間。
+              請稍候，系統正在為您排版並優化文件畫質...<br />這可能需要幾秒鐘的時間。
             </p>
           </div>
         </div>
       )}
 
       <div className="flex items-center justify-between mb-6 no-print">
-        <button 
+        <button
           onClick={onBack}
           className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 rounded-xl font-bold transition-all shadow-sm"
         >
@@ -77,9 +77,9 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, totalA
       </div>
 
       {/* Document Sheet - This is what gets captured */}
-      <div 
+      <div
         ref={pdfRef}
-        className="bg-white shadow-2xl border border-slate-200 rounded-lg p-8 md:p-16 min-h-[1056px] mx-auto max-w-[816px] text-slate-800 pdf-content"
+        className="bg-white shadow-2xl border border-slate-200 rounded-lg p-6 md:p-10 min-h-[842px] mx-auto max-w-[595px] text-slate-800 pdf-content origin-top transform scale-95"
       >
         <div className="text-center border-b-2 border-slate-900 pb-8 mb-10">
           <h1 className="text-3xl font-black mb-2 tracking-tight">車禍事故求償一覽表</h1>
@@ -96,9 +96,9 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, totalA
             if (categoryItems.length === 0) return null;
 
             return (
-              <div key={category}>
-                <h2 className="text-xl font-bold mb-4 border-l-4 border-slate-800 pl-3">{category}</h2>
-                <table className="w-full border-collapse">
+              <div key={category} className="mb-6">
+                <h2 className="text-lg font-bold mb-2 border-l-4 border-slate-800 pl-3">{category}</h2>
+                <table className="w-full border-collapse text-sm">
                   <thead>
                     <tr className="bg-slate-100">
                       <th className="border border-slate-300 px-4 py-2 text-left">請求項目</th>
@@ -108,11 +108,10 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, totalA
                   <tbody>
                     {categoryItems.map(item => (
                       <tr key={item.id}>
-                        <td className="border border-slate-300 px-4 py-3 text-slate-700">
+                        <td className="border border-slate-300 px-4 py-2 text-slate-700">
                           <p className="font-medium">{item.name}</p>
-                          <p className="text-xs text-slate-400 mt-1 italic">{item.hint}</p>
                         </td>
-                        <td className="border border-slate-300 px-4 py-3 text-right font-mono font-bold">
+                        <td className="border border-slate-300 px-4 py-2 text-right font-mono font-bold">
                           {item.amount.toLocaleString()}
                         </td>
                       </tr>
