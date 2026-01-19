@@ -19,14 +19,7 @@ export const INITIAL_ITEMS: ClaimItem[] = [
     hint: '因受傷無法上班期間的工資。',
     description: '須提供診斷證明書（載明需休養天數）及薪資證明。'
   },
-  {
-    id: '3',
-    category: CategoryType.MEDICAL_AND_SALARY,
-    name: '醫療交通費',
-    amount: 0,
-    hint: '往返醫院就醫產生的交通費用。',
-    description: '建議留存計程車收據或紀錄里程數計算。'
-  },
+
   {
     id: '6',
     category: CategoryType.MEDICAL_AND_SALARY,
