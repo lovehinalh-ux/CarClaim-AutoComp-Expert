@@ -19,9 +19,16 @@ export interface MedicalEntry {
   amount: number;
 }
 
+export interface CustomItem {
+  id: string;
+  name: string;
+  amount: number;
+}
+
 export interface FormState {
   claimantName: string;
   accidentDate: string;
   items: ClaimItem[];
   medicalEntries: MedicalEntry[];
+  customItems: CustomItem[];
 }

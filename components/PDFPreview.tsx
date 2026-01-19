@@ -1,6 +1,6 @@
 
 import React, { useRef, useState } from 'react';
-import { ClaimItem, CategoryType } from '../types';
+import { ClaimItem, CategoryType, CustomItem } from '../types';
 import { Printer, FileText, ArrowLeft, Download, Loader2 } from 'lucide-react';
 import html2pdf from 'html2pdf.js';
 
@@ -8,12 +8,13 @@ interface Props {
   claimantName: string;
   accidentDate: string;
   items: ClaimItem[];
+  customItems: CustomItem[];
   totalAmount: number;
   onBack: () => void;
   onPrint: () => void;
 }
 
-const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, totalAmount, onBack, onPrint }) => {
+const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, customItems, totalAmount, onBack, onPrint }) => {
   const pdfRef = useRef<HTMLDivElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -121,6 +122,40 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, totalA
               </div>
             );
           })}
+
+          {/* Custom Items Section */}
+          {items.some(() => true) && ( // Check if we have active custom items
+            (() => {
+              const activeCustomItems = customItems.filter(item => item.amount > 0 || item.name.trim() !== '');
+              if (activeCustomItems.length === 0) return null;
+
+              return (
+                <div className="mb-6">
+                  <h2 className="text-lg font-bold mb-2 border-l-4 border-slate-800 pl-3">其他求償項目</h2>
+                  <table className="w-full border-collapse text-sm">
+                    <thead>
+                      <tr className="bg-slate-100">
+                        <th className="border border-slate-300 px-4 py-2 text-left">請求項目</th>
+                        <th className="border border-slate-300 px-4 py-2 text-right w-40">金額 (NT$)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {activeCustomItems.map(item => (
+                        <tr key={item.id}>
+                          <td className="border border-slate-300 px-4 py-2 text-slate-700">
+                            <p className="font-medium">{item.name || '（未命名項目）'}</p>
+                          </td>
+                          <td className="border border-slate-300 px-4 py-2 text-right font-mono font-bold">
+                            {(item.amount || 0).toLocaleString()}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              );
+            })()
+          )}
 
           <div className="border-t-4 border-slate-900 pt-6 mt-12 flex justify-between items-center">
             <span className="text-2xl font-black text-slate-800">預估總求償金額</span>

@@ -1,15 +1,15 @@
-
 import React, { useState, useMemo, useEffect } from 'react';
 import Header from './components/Header';
 import ClaimCategorySection from './components/ClaimCategorySection';
+import OtherItemsSection from './components/OtherItemsSection';
 import Disclaimer from './components/Disclaimer';
 import MedicalDetailsTable from './components/MedicalDetailsTable';
 import ProfileCard from './components/ProfileCard';
 import PreviewLanding from './components/PreviewLanding';
 import PDFPreview from './components/PDFPreview';
-import { CategoryType, ClaimItem, FormState, MedicalEntry } from './types';
+import { CategoryType, ClaimItem, FormState, MedicalEntry, CustomItem } from './types';
 import { INITIAL_ITEMS, INITIAL_MEDICAL_ENTRIES } from './constants';
-import { Download, Calculator, User, Calendar, ClipboardList, Stethoscope, Eye, AlertCircle, Trash2, ArrowLeft } from 'lucide-react';
+import { Download, Calculator, User, ClipboardList, Stethoscope, Eye, AlertCircle, Trash2, ArrowLeft } from 'lucide-react';
 import SEO from './components/SEO';
 
 type ViewMode = 'landing' | 'summary' | 'medical' | 'preview';
@@ -27,6 +27,10 @@ const App: React.FC = () => {
     accidentDate: '',
     items: INITIAL_ITEMS,
     medicalEntries: INITIAL_MEDICAL_ENTRIES,
+    customItems: [
+      { id: 'custom-1', name: '', amount: 0 },
+      { id: 'custom-2', name: '', amount: 0 },
+    ]
   });
 
   const [errors, setErrors] = useState<ValidationErrors>({});
@@ -99,6 +103,10 @@ const App: React.FC = () => {
     }));
   };
 
+  const handleCustomItemsUpdate = (newItems: CustomItem[]) => {
+    setFormState(prev => ({ ...prev, customItems: newItems }));
+  };
+
   const handleReset = () => {
     if (window.confirm('確定要清除所有已填寫的資料嗎？此操作無法復原。')) {
       setFormState({
@@ -106,6 +114,10 @@ const App: React.FC = () => {
         accidentDate: '',
         items: INITIAL_ITEMS.map(item => ({ ...item, amount: 0 })),
         medicalEntries: INITIAL_MEDICAL_ENTRIES.map(entry => ({ ...entry, date: '', amount: 0 })),
+        customItems: [
+          { id: `custom-${Date.now()}-1`, name: '', amount: 0 },
+          { id: `custom-${Date.now()}-2`, name: '', amount: 0 },
+        ]
       });
       setErrors({});
       setViewMode('summary');
@@ -114,8 +126,10 @@ const App: React.FC = () => {
   };
 
   const totalClaimAmount = useMemo(() => {
-    return formState.items.reduce((sum, item) => sum + item.amount, 0);
-  }, [formState.items]);
+    const standardTotal = formState.items.reduce((sum, item) => sum + item.amount, 0);
+    const customTotal = formState.customItems.reduce((sum, item) => sum + (item.amount || 0), 0);
+    return standardTotal + customTotal;
+  }, [formState.items, formState.customItems]);
 
   const categories = Object.values(CategoryType);
 
@@ -249,6 +263,11 @@ const App: React.FC = () => {
               />
             ))}
 
+            <OtherItemsSection
+              items={formState.customItems}
+              onUpdate={handleCustomItemsUpdate}
+            />
+
             <Disclaimer />
 
             <div className="no-print">
@@ -278,6 +297,7 @@ const App: React.FC = () => {
               claimantName={formState.claimantName}
               accidentDate={formState.accidentDate}
               items={formState.items}
+              customItems={formState.customItems}
               totalAmount={totalClaimAmount}
               onBack={() => navigateTo('summary')}
               onPrint={handleExportPDF}
@@ -287,19 +307,45 @@ const App: React.FC = () => {
 
         {/* Print Styles */}
         <style>{`
+          /* Print specific styles */
           @media print {
-            body { background: white !important; margin: 0; padding: 0; }
+            /* Hide UI elements */
             header, .no-print, button, .group, .help-icon, nav, .fixed { display: none !important; }
+            
+            /* Reset body and container */
+            body { 
+              background: white !important; 
+              margin: 0 !important; 
+              padding: 0 !important;
+              width: 100% !important;
+              height: auto !important;
+              overflow: visible !important;
+            }
+            
+            main {
+              margin: 0 !important;
+              padding: 0 !important;
+              width: 100% !important;
+              max-width: none !important;
+            }
+
+            /* Ensure PDF content is visible and takes full width */
+            .pdf-content {
+              transform: none !important;
+              margin: 0 !important;
+              padding: 20px !important;
+              width: 100% !important;
+              max-width: 100% !important;
+              box-shadow: none !important;
+              border: none !important;
+              display: block !important;
+              position: static !important;
+              visibility: visible !important;
+              opacity: 1 !important;
+            }
+
+            /* Show print-only elements */
             .print-only { display: block !important; }
-            .max-w-4xl { max-width: 100% !important; margin: 0 !important; width: 100% !important; }
-            main { padding: 0 !important; margin-top: 0 !important; }
-            .shadow-2xl, .shadow-sm, .shadow-xl, .shadow-inner { box-shadow: none !important; }
-            .border { border: 1px solid #e2e8f0 !important; }
-            .min-h-screen { min-height: auto !important; }
-            .bg-slate-50 { background: white !important; }
-            .bg-white { background: white !important; }
-            .rounded-lg, .rounded-2xl { border-radius: 0 !important; }
-            input { border: none !important; appearance: none !important; padding: 0 !important; background: transparent !important; }
           }
         `}</style>
       </main>
