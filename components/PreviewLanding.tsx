@@ -18,12 +18,12 @@ const PreviewLanding: React.FC<Props> = ({ onStart }) => {
           </div>
 
           <div className="relative z-10 flex flex-col items-center">
-            <div className="w-20 h-20 bg-red-600 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-red-200 transform -rotate-3">
+            <div className="w-20 h-20 bg-blue-900 rounded-2xl flex items-center justify-center text-white mb-6 shadow-xl shadow-blue-100 transform -rotate-3 transition-transform hover:rotate-0 duration-500">
               <ShieldCheck size={40} />
             </div>
             <h1 className="text-4xl md:text-5xl font-black mb-3 text-stone-900 tracking-tight uppercase">
               Car Compensation<br />
-              <span className="text-red-600">Expert</span>
+              <span className="text-blue-900">Expert</span>
             </h1>
             <div className="h-1.5 w-16 bg-stone-900 rounded-full my-4"></div>
             <p className="text-stone-500 text-lg font-bold tracking-wide">
@@ -35,8 +35,8 @@ const PreviewLanding: React.FC<Props> = ({ onStart }) => {
         <div className="p-8 md:p-12">
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            <div className="flex gap-4 p-5 rounded-2xl bg-stone-50 border border-stone-200 items-start group hover:border-red-200 transition-colors">
-              <div className="bg-white p-3 rounded-xl text-red-600 shrink-0 border border-stone-200 shadow-sm group-hover:scale-110 transition-transform">
+            <div className="flex gap-4 p-6 rounded-3xl bg-white border border-stone-100 items-start group hover:border-blue-200 hover:shadow-lg transition-all duration-300">
+              <div className="bg-blue-50 p-3 rounded-xl text-blue-900 shrink-0 border border-blue-100 shadow-sm group-hover:scale-110 transition-transform">
                 <Calculator size={24} />
               </div>
               <div>
@@ -44,8 +44,8 @@ const PreviewLanding: React.FC<Props> = ({ onStart }) => {
                 <p className="text-sm text-stone-600 font-medium leading-relaxed">涵蓋醫療、薪資、交通及精神慰撫金完整計算。</p>
               </div>
             </div>
-            <div className="flex gap-4 p-5 rounded-2xl bg-stone-50 border border-stone-200 items-start group hover:border-red-200 transition-colors">
-              <div className="bg-white p-3 rounded-xl text-stone-900 shrink-0 border border-stone-200 shadow-sm group-hover:scale-110 transition-transform">
+            <div className="flex gap-4 p-6 rounded-3xl bg-white border border-stone-100 items-start group hover:border-blue-200 hover:shadow-lg transition-all duration-300">
+              <div className="bg-stone-50 p-3 rounded-xl text-stone-900 shrink-0 border border-stone-200 shadow-sm group-hover:scale-110 transition-transform">
                 <ShieldCheck size={24} />
               </div>
               <div>
@@ -72,7 +72,7 @@ const PreviewLanding: React.FC<Props> = ({ onStart }) => {
 
           <button
             onClick={onStart}
-            className="w-full bg-red-600 hover:bg-red-700 text-white py-5 rounded-2xl font-black text-2xl shadow-xl shadow-red-200 transition-all transform hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-3 group tracking-wider"
+            className="w-full bg-blue-900 hover:bg-black text-white py-6 rounded-2xl font-black text-2xl shadow-2xl shadow-blue-100 transition-all transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3 group tracking-wider"
           >
             立即開始試算 <ArrowRight className="group-hover:translate-x-1 transition-transform" />
           </button>

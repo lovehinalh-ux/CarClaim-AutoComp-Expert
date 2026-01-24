@@ -2,16 +2,15 @@
 
 @layer base {
     :root {
-        /* Brand Colors - Authoritative & Warm */
+        /* Brand Colors - Professional Navy & Gold */
         --color-brand-primary: #1e3a8a;
         /* Deep Royal Blue */
-        --color-brand-secondary: #ea580c;
-        /* Warm Orange for CTAs */
-        /* Warm off-white (Alabaster) */
+        --color-brand-secondary: #d4af37;
+        /* Muted Gold for accents */
+        --color-brand-surface: #fafaf9;
+        /* Stone-50 */
         --color-brand-gold: #B8860B;
-        /* Business Gold */
         --color-brand-gold-light: #F5F5DC;
-        /* Premium Beige */
     }
 
     body {
@@ -67,6 +66,5 @@
     min-height: 297mm;
     /* A4 height */
     margin: 0 auto;
-    font-size: 14px;
-    /* Slightly smaller font */
+    font-size: 11px;
 }

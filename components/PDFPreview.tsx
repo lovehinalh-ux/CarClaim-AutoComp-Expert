@@ -10,11 +10,12 @@ interface Props {
   items: ClaimItem[];
   customItems: CustomItem[];
   totalAmount: number;
+  medicalEntries: any[]; // Or use MedicalEntry type if imported
   onBack: () => void;
   onPrint: () => void;
 }
 
-const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, customItems, totalAmount, onBack, onPrint }) => {
+const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, customItems, totalAmount, medicalEntries, onBack, onPrint }) => {
   const pdfRef = useRef<HTMLDivElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -28,16 +29,17 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
 
     const element = pdfRef.current;
     const opt = {
-      margin: 10,
+      margin: [10, 10],
       filename: `車禍求償清單_${claimantName || '未命名'}_${new Date().toISOString().split('T')[0]}.pdf`,
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: {
-        scale: 2, // Keep quality high
+        scale: 2,
         useCORS: true,
         letterRendering: true,
         scrollY: 0,
       },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
 
     try {
@@ -56,9 +58,9 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
       {isGenerating && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6 text-center">
           <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-sm w-full animate-in zoom-in-95">
-            <Loader2 className="w-12 h-12 text-blue-600 animate-spin mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-slate-800 mb-2">正在產製專業 PDF</h3>
-            <p className="text-slate-500 text-sm leading-relaxed">
+            <Loader2 className="w-12 h-12 text-blue-900 animate-spin mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-stone-800 mb-2">正在產製專業 PDF</h3>
+            <p className="text-stone-500 text-sm leading-relaxed">
               請稍候，系統正在為您排版並優化文件畫質...<br />這可能需要幾秒鐘的時間。
             </p>
           </div>
@@ -72,7 +74,7 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
         >
           <ArrowLeft size={20} /> 返回修改資料
         </button>
-        <div className="flex items-center gap-2 text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full text-sm font-bold border border-blue-100">
+        <div className="flex items-center gap-2 text-blue-900 bg-blue-50 px-4 py-1.5 rounded-full text-sm font-bold border border-blue-100">
           <FileText size={16} /> 您正在查看 PDF 預覽
         </div>
       </div>
@@ -80,7 +82,7 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
       {/* Document Sheet - This is what gets captured */}
       <div
         ref={pdfRef}
-        className="bg-white shadow-2xl border border-slate-200 rounded-lg p-6 md:p-10 min-h-[842px] mx-auto max-w-[595px] text-slate-800 pdf-content origin-top transform scale-95"
+        className="bg-white shadow-2xl border border-stone-200 p-6 md:p-8 min-h-[842px] mx-auto max-w-[595px] text-stone-800 pdf-content origin-top transform scale-95 text-[11px]"
       >
         <div className="text-center border-b-2 border-slate-900 pb-8 mb-10">
           <h1 className="text-3xl font-black mb-2 tracking-tight">車禍事故求償一覽表</h1>
@@ -157,37 +159,67 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
             })()
           )}
 
-          <div className="border-t-4 border-slate-900 pt-6 mt-12 flex justify-between items-center">
-            <span className="text-2xl font-black text-slate-800">預估總求償金額</span>
+          <div className="border-t-4 border-stone-900 pt-6 mt-12 flex justify-between items-center">
+            <span className="text-2xl font-black text-stone-800">預估總求償金額</span>
             <div className="text-right">
-              <span className="text-3xl font-black text-blue-700 font-mono">
+              <span className="text-3xl font-black text-blue-900 font-mono">
                 NT$ {totalAmount.toLocaleString()}
               </span>
-              <p className="text-xs text-slate-400 mt-1 italic">（此金額僅供參考，詳見下方說明）</p>
+              <p className="text-xs text-stone-400 mt-1 italic">（此金額僅供參考，詳見下方說明）</p>
             </div>
           </div>
 
-          <div className="mt-16 pt-8 border-t border-slate-200">
-            <h3 className="font-bold text-slate-900 mb-3 underline">備註與聲明：</h3>
-            <ul className="text-sm text-slate-600 space-y-2 list-disc ml-5 leading-relaxed">
+          <div className="mt-10 pt-6 border-t border-stone-200">
+            <h3 className="font-bold text-stone-900 mb-2 underline">備註與聲明：</h3>
+            <ul className="text-[10px] text-stone-600 space-y-1 list-disc ml-5 leading-relaxed">
               <li>本清單內容僅供調解或法律訴訟參考之用，非最終判決結果。</li>
               <li>所有請求項目皆應備妥相應之憑證（如醫療單據、維修發票、薪資證明等）以供查核。</li>
               <li>精神慰撫金之具體數額仍須由法官審核兩造身份資力、受害程度而定。</li>
               <li>本表係由「車禍求償小幫手」工具產製，計算結果之正確性仍需依實務判定。</li>
             </ul>
           </div>
+        </div>
 
-          <div className="mt-20 flex justify-between gap-12">
-            <div className="text-center border-t border-slate-400 pt-4 flex-1">
-              <p className="text-sm font-bold text-slate-600">求償人（簽名/蓋章）</p>
-              <div className="h-20"></div>
+        {/* Page Break for Medical Details */}
+        {medicalEntries.filter(e => e.amount > 0).length > 0 && (
+          <div className="mt-10" style={{ pageBreakBefore: 'always' }}>
+            <div className="text-center border-b-2 border-stone-900 pb-4 mb-8">
+              <h2 className="text-xl font-black">醫療費用詳情附件</h2>
+              <p className="text-[10px] text-stone-500 mt-2">求償人：{claimantName} | 事故日期：{accidentDate}</p>
             </div>
-            <div className="text-center border-t border-slate-400 pt-4 flex-1">
-              <p className="text-sm font-bold text-slate-600">產製日期</p>
-              <p className="mt-4 font-mono text-slate-500">{new Date().toLocaleDateString('zh-TW')}</p>
+
+            <table className="w-full border-collapse text-[10px]">
+              <thead>
+                <tr className="bg-stone-100">
+                  <th className="border border-stone-300 px-3 py-2 text-left w-12">序號</th>
+                  <th className="border border-stone-300 px-3 py-2 text-left">就醫日期</th>
+                  <th className="border border-stone-300 px-3 py-2 text-right">金額 (NT$)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {medicalEntries.filter(e => e.amount > 0).map((entry, idx) => (
+                  <tr key={entry.id}>
+                    <td className="border border-stone-300 px-3 py-2 text-center text-stone-500">{idx + 1}</td>
+                    <td className="border border-stone-300 px-3 py-2">{entry.date || '未填寫'}</td>
+                    <td className="border border-stone-300 px-3 py-2 text-right font-mono font-bold">{entry.amount.toLocaleString()}</td>
+                  </tr>
+                ))}
+                <tr className="bg-stone-50 font-black">
+                  <td colSpan={2} className="border border-stone-300 px-3 py-2 text-right">醫療費用總計</td>
+                  <td className="border border-stone-300 px-3 py-2 text-right text-blue-900">
+                    NT$ {medicalEntries.reduce((s, e) => s + e.amount, 0).toLocaleString()}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div className="mt-6 p-4 bg-stone-50 rounded-lg border border-stone-100">
+              <p className="text-[9px] text-stone-500 leading-relaxed">
+                * 註：醫療費用包含掛號費、部分負擔、各項處置及藥品費用。請務必保留所有收據正本以利後續核對。
+              </p>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="mt-12 flex flex-col md:flex-row justify-center gap-6 no-print">
@@ -201,7 +233,7 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
         <button
           onClick={handleDownloadPDF}
           disabled={isGenerating}
-          className="flex items-center justify-center gap-3 bg-blue-700 hover:bg-blue-800 text-white px-10 py-4 rounded-2xl font-black text-xl shadow-xl transform transition-all hover:scale-105 active:scale-95 shadow-blue-200 disabled:opacity-50"
+          className="flex items-center justify-center gap-3 bg-blue-900 hover:bg-black text-white px-10 py-4 rounded-2xl font-black text-xl shadow-2xl transform transition-all hover:scale-105 active:scale-95 shadow-blue-100 disabled:opacity-50"
         >
           {isGenerating ? (
             <Loader2 className="animate-spin" size={24} />
