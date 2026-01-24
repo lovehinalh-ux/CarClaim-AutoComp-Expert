@@ -303,6 +303,7 @@ const App: React.FC = () => {
               items={formState.items}
               customItems={formState.customItems}
               totalAmount={totalClaimAmount}
+              medicalEntries={formState.medicalEntries}
               onBack={() => navigateTo('summary')}
               onPrint={handleExportPDF}
             />
