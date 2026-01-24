@@ -154,60 +154,60 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen pb-40 bg-slate-50">
+    <div className="min-h-screen pb-40 bg-stone-50">
       <SEO />
       <div className="no-print">
         <Header />
       </div>
 
-      <main className="max-w-4xl mx-auto px-4">
-        {/* Navigation Tabs (Mobile-friendly) */}
-        <div className="flex bg-slate-200/50 p-1 rounded-xl mb-8 no-print shadow-inner">
+      <main className="max-w-4xl mx-auto px-6 md:px-8 py-8">
+        {/* Navigation Tabs (Swiss Style) */}
+        <div className="flex bg-stone-200/50 p-1.5 rounded-2xl mb-10 no-print">
           <button
             onClick={() => navigateTo('summary')}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-bold transition-all ${viewMode === 'summary' ? 'bg-white shadow text-blue-700' : 'text-slate-600 hover:bg-white/50'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'summary' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-500 hover:text-stone-700 hover:bg-stone-100'}`}
           >
-            <ClipboardList size={18} /> 求償一覽表
+            <ClipboardList size={20} /> 求償一覽表
           </button>
           <button
             onClick={() => navigateTo('medical')}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-bold transition-all ${viewMode === 'medical' ? 'bg-white shadow text-blue-700' : 'text-slate-600 hover:bg-white/50'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'medical' ? 'bg-white shadow-sm text-red-600' : 'text-stone-500 hover:text-stone-700 hover:bg-stone-100'}`}
           >
-            <Stethoscope size={18} /> 醫療明細試算
+            <Stethoscope size={20} /> 醫療明細
           </button>
           <button
             onClick={() => navigateTo('preview')}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-bold transition-all ${viewMode === 'preview' ? 'bg-white shadow text-blue-700' : 'text-slate-600 hover:bg-white/50'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'preview' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-500 hover:text-stone-700 hover:bg-stone-100'}`}
           >
-            <Eye size={18} /> 查看預覽
+            <Eye size={20} /> 預覽輸出
           </button>
         </div>
 
         {viewMode === 'summary' && (
-          <div className="space-y-8 animate-in fade-in duration-500">
+          <div className="space-y-10 animate-in fade-in duration-500">
             {/* Action Bar */}
-            <div className="flex justify-between items-center no-print">
-              <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-                <User size={20} className="text-blue-600" /> 基本資訊與項目填寫
+            <div className="flex justify-between items-center no-print border-b border-stone-200 pb-4">
+              <h2 className="text-3xl font-black text-stone-900 flex items-center gap-3 tracking-tight">
+                <User size={28} className="text-stone-900" /> 基本資訊
               </h2>
               <button
                 onClick={handleReset}
-                className="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors font-bold border border-red-100 shadow-sm"
+                className="flex items-center gap-2 px-5 py-2.5 text-red-600 hover:bg-red-50 rounded-xl transition-colors font-bold border-2 border-red-100"
               >
-                <Trash2 size={16} /> 一鍵清除
+                <Trash2 size={18} /> 清除重填
               </button>
             </div>
 
-            {/* Basic Info */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 flex flex-col md:flex-row gap-6 relative">
-              <div className="flex-1 space-y-2">
-                <label className={`flex items-center gap-2 text-sm font-bold ${errors.claimantName ? 'text-red-600' : 'text-slate-700'}`}>
+            {/* Basic Info Card */}
+            <div className="bg-white rounded-3xl shadow-sm border border-stone-100 p-8 flex flex-col md:flex-row gap-8">
+              <div className="flex-1 space-y-3">
+                <label className={`flex items-center gap-2 text-base font-bold ${errors.claimantName ? 'text-red-600' : 'text-stone-900'}`}>
                   求償人姓名 <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   placeholder="請輸入姓名"
-                  className={`w-full border rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 transition-all ${errors.claimantName ? 'border-red-300 bg-red-50 focus:ring-red-500' : 'border-slate-200 focus:ring-blue-500'}`}
+                  className={`w-full border-2 rounded-xl px-5 py-4 focus:outline-none transition-all text-lg font-medium ${errors.claimantName ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-stone-200 focus:border-stone-900 bg-stone-50 focus:bg-white'}`}
                   value={formState.claimantName}
                   onChange={(e) => {
                     setFormState(prev => ({ ...prev, claimantName: e.target.value }));
@@ -215,18 +215,18 @@ const App: React.FC = () => {
                   }}
                 />
                 {errors.claimantName && (
-                  <p className="text-red-500 text-xs flex items-center gap-1 mt-1 font-medium">
-                    <AlertCircle size={12} /> {errors.claimantName}
+                  <p className="text-red-600 text-sm flex items-center gap-1 font-bold">
+                    <AlertCircle size={14} /> {errors.claimantName}
                   </p>
                 )}
               </div>
-              <div className="flex-1 space-y-2">
-                <label className={`flex items-center gap-2 text-sm font-bold ${errors.accidentDate ? 'text-red-600' : 'text-slate-700'}`}>
-                  事故發生日期 <span className="text-red-500">*</span>
+              <div className="flex-1 space-y-3">
+                <label className={`flex items-center gap-2 text-base font-bold ${errors.accidentDate ? 'text-red-600' : 'text-stone-900'}`}>
+                  事故日期 <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="date"
-                  className={`w-full border rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 transition-all ${errors.accidentDate ? 'border-red-300 bg-red-50 focus:ring-red-500' : 'border-slate-200 focus:ring-blue-500'}`}
+                  className={`w-full border-2 rounded-xl px-5 py-4 focus:outline-none transition-all text-lg font-medium ${errors.accidentDate ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-stone-200 focus:border-stone-900 bg-stone-50 focus:bg-white'}`}
                   value={formState.accidentDate}
                   onChange={(e) => {
                     setFormState(prev => ({ ...prev, accidentDate: e.target.value }));
@@ -234,8 +234,8 @@ const App: React.FC = () => {
                   }}
                 />
                 {errors.accidentDate && (
-                  <p className="text-red-500 text-xs flex items-center gap-1 mt-1 font-medium">
-                    <AlertCircle size={12} /> {errors.accidentDate}
+                  <p className="text-red-600 text-sm flex items-center gap-1 font-bold">
+                    <AlertCircle size={14} /> {errors.accidentDate}
                   </p>
                 )}
               </div>
@@ -245,10 +245,11 @@ const App: React.FC = () => {
             <div className="flex justify-end no-print">
               <button
                 onClick={() => navigateTo('medical')}
-                className="text-blue-600 hover:text-blue-800 text-sm font-bold flex items-center gap-1 group bg-blue-50/50 px-3 py-1.5 rounded-lg border border-blue-100 transition-colors"
+                className="text-stone-900 hover:text-red-600 text-base font-bold flex items-center gap-2 group bg-white px-5 py-3 rounded-xl border-2 border-stone-200 transition-all hover:border-red-200 shadow-sm"
               >
-                <Calculator size={14} className="group-hover:rotate-12 transition-transform" />
-                點擊此處計算詳細醫療明細
+                <Calculator size={18} />
+                進入醫療明細計算機
+                <ArrowLeft size={18} className="rotate-180 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
 
@@ -268,7 +269,9 @@ const App: React.FC = () => {
               onUpdate={handleCustomItemsUpdate}
             />
 
-            <Disclaimer />
+            <div className="pt-8 border-t-2 border-stone-200">
+              <Disclaimer />
+            </div>
 
             <div className="no-print">
               <ProfileCard />
@@ -285,8 +288,9 @@ const App: React.FC = () => {
               onRemoveRow={handleRemoveMedicalRow}
               onBack={() => navigateTo('summary')}
             />
-            <div className="mt-6 text-slate-500 text-sm italic">
-              * 填寫完畢後，總金額將自動帶入「求償一覽表」中的醫療費用欄位。
+            <div className="mt-8 p-6 bg-stone-100 rounded-2xl text-stone-600 text-base font-medium flex items-center gap-3">
+              <AlertCircle size={20} />
+              填寫完畢後，總金額將自動帶入「求償一覽表」中的醫療費用欄位。
             </div>
           </div>
         )}
@@ -307,88 +311,53 @@ const App: React.FC = () => {
 
         {/* Print Styles */}
         <style>{`
-          /* Print specific styles */
           @media print {
-            /* Hide UI elements */
             header, .no-print, button, .group, .help-icon, nav, .fixed { display: none !important; }
-            
-            /* Reset body and container */
-            body { 
-              background: white !important; 
-              margin: 0 !important; 
-              padding: 0 !important;
-              width: 100% !important;
-              height: auto !important;
-              overflow: visible !important;
-            }
-            
-            main {
-              margin: 0 !important;
-              padding: 0 !important;
-              width: 100% !important;
-              max-width: none !important;
-            }
-
-            /* Ensure PDF content is visible and takes full width */
-            .pdf-content {
-              transform: none !important;
-              margin: 0 !important;
-              padding: 20px !important;
-              width: 100% !important;
-              max-width: 100% !important;
-              box-shadow: none !important;
-              border: none !important;
-              display: block !important;
-              position: static !important;
-              visibility: visible !important;
-              opacity: 1 !important;
-            }
-
-            /* Show print-only elements */
-            .print-only { display: block !important; }
+            body { background: white !important; -webkit-print-color-adjust: exact; }
+            main { padding: 0 !important; max-width: none !important; margin: 0 !important; }
           }
         `}</style>
       </main>
 
-      {/* Floating Bottom Bar */}
-      <div className={`fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-2xl p-4 md:p-6 z-40 no-print transition-all duration-500`}>
+      {/* Floating Bottom Bar (Friendly Light Theme) */}
+      <div className={`fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-stone-200 shadow-[0_-10px_40px_-5px_rgba(0,0,0,0.1)] p-4 md:p-6 z-40 no-print transition-all duration-500`}>
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-baseline gap-3">
-            <span className="text-slate-500 font-medium">
-              {viewMode === 'medical' ? '醫療明細總計：' : '預估總求償金額：'}
+          <div className="flex items-baseline gap-3 bg-stone-50 px-4 py-2 rounded-xl border border-stone-100 w-full md:w-auto justify-center md:justify-start">
+            <span className="text-stone-500 font-bold text-sm uppercase tracking-wide">
+              {viewMode === 'medical' ? '醫療總計' : '求償總額'}
             </span>
-            <span className={`text-3xl font-black ${viewMode === 'medical' ? 'text-blue-500' : 'text-blue-700'}`}>
+            <span className={`text-3xl font-black tabular-nums tracking-tight ${viewMode === 'medical' ? 'text-blue-600' : 'text-red-600'}`}>
               NT$ {(viewMode === 'medical' ? medicalTotal : totalClaimAmount).toLocaleString()}
             </span>
           </div>
-          <div className="flex gap-4 w-full md:w-auto">
+          <div className="flex gap-3 w-full md:w-auto">
             {viewMode === 'summary' ? (
               <button
                 onClick={() => navigateTo('preview')}
-                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[#B8860B] hover:bg-[#8B4513] text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-orange-200"
+                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-stone-900 text-white px-6 py-3.5 rounded-xl font-bold text-lg transition-all hover:bg-black hover:scale-[1.02] active:scale-95 shadow-lg shadow-stone-200"
               >
-                <Eye size={20} /> 生成預覽並輸出
+                <Eye size={20} /> 預覽並輸出
               </button>
             ) : viewMode === 'medical' ? (
               <button
                 onClick={() => navigateTo('summary')}
-                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-900 text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg"
+                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-stone-900 text-white px-6 py-3.5 rounded-xl font-bold text-lg transition-all hover:bg-black hover:scale-[1.02] active:scale-95 shadow-lg shadow-stone-200"
               >
-                完成計算並返回
+                完成計算
               </button>
             ) : (
               <div className="flex gap-3 w-full">
                 <button
                   onClick={() => navigateTo('summary')}
-                  className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 px-6 py-3 rounded-xl font-bold transition-all shadow-sm"
+                  className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-white border-2 border-stone-200 text-stone-600 hover:text-stone-900 hover:border-stone-900 px-5 py-3.5 rounded-xl font-bold transition-all"
                 >
-                  <ArrowLeft size={18} /> 返回修改內容
+                  <ArrowLeft size={20} /> 修改
                 </button>
                 <button
                   onClick={handleExportPDF}
-                  className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[#B8860B] hover:bg-[#8B4513] text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-orange-200"
+                  className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-3.5 rounded-xl font-bold text-lg transition-all hover:scale-[1.02] shadow-lg shadow-red-200"
                 >
-                  <Download size={20} /> 確認輸出 PDF
+                  <Download size={20} /> 下載 PDF
                 </button>
               </div>
             )}
