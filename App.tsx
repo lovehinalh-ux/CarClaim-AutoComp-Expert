@@ -140,7 +140,7 @@ const App: React.FC = () => {
   const navigateTo = (mode: ViewMode) => {
     if (mode === 'preview' || mode === 'medical') {
       if (!validateBasicInfo()) {
-        const firstError = document.querySelector('.text-red-500');
+        const firstError = document.querySelector('.text-amber-700');
         firstError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
       }
@@ -171,7 +171,7 @@ const App: React.FC = () => {
           </button>
           <button
             onClick={() => navigateTo('medical')}
-            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'medical' ? 'bg-white shadow-sm text-red-600' : 'text-stone-500 hover:text-stone-700 hover:bg-stone-100'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'medical' ? 'bg-white shadow-sm text-blue-700 border-2 border-stone-200' : 'text-stone-500 hover:text-stone-700 hover:bg-stone-100'}`}
           >
             <Stethoscope size={20} /> 醫療明細
           </button>
@@ -192,7 +192,7 @@ const App: React.FC = () => {
               </h2>
               <button
                 onClick={handleReset}
-                className="flex items-center gap-2 px-5 py-2.5 text-red-600 hover:bg-red-50 rounded-xl transition-colors font-bold border-2 border-red-100"
+                className="flex items-center gap-2 px-5 py-2.5 text-stone-500 hover:bg-stone-50 rounded-xl transition-colors font-bold border-2 border-stone-100"
               >
                 <Trash2 size={18} /> 清除重填
               </button>
@@ -201,13 +201,13 @@ const App: React.FC = () => {
             {/* Basic Info Card */}
             <div className="bg-white rounded-3xl shadow-sm border border-stone-100 p-8 flex flex-col md:flex-row gap-8">
               <div className="flex-1 space-y-3">
-                <label className={`flex items-center gap-2 text-base font-bold ${errors.claimantName ? 'text-red-600' : 'text-stone-900'}`}>
-                  求償人姓名 <span className="text-red-500">*</span>
+                <label className={`flex items-center gap-2 text-base font-bold ${errors.claimantName ? 'text-amber-700' : 'text-stone-900'}`}>
+                  求償人姓名 <span className="text-amber-500">*</span>
                 </label>
                 <input
                   type="text"
                   placeholder="請輸入姓名"
-                  className={`w-full border-2 rounded-xl px-5 py-4 focus:outline-none transition-all text-lg font-medium ${errors.claimantName ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-stone-200 focus:border-stone-900 bg-stone-50 focus:bg-white'}`}
+                  className={`w-full border-2 rounded-xl px-5 py-4 focus:outline-none transition-all text-lg font-medium ${errors.claimantName ? 'border-amber-300 bg-amber-50 focus:border-amber-500' : 'border-stone-200 focus:border-stone-900 bg-stone-50 focus:bg-white'}`}
                   value={formState.claimantName}
                   onChange={(e) => {
                     setFormState(prev => ({ ...prev, claimantName: e.target.value }));
@@ -215,18 +215,18 @@ const App: React.FC = () => {
                   }}
                 />
                 {errors.claimantName && (
-                  <p className="text-red-600 text-sm flex items-center gap-1 font-bold">
+                  <p className="text-amber-700 text-sm flex items-center gap-1 font-bold">
                     <AlertCircle size={14} /> {errors.claimantName}
                   </p>
                 )}
               </div>
               <div className="flex-1 space-y-3">
-                <label className={`flex items-center gap-2 text-base font-bold ${errors.accidentDate ? 'text-red-600' : 'text-stone-900'}`}>
-                  事故日期 <span className="text-red-500">*</span>
+                <label className={`flex items-center gap-2 text-base font-bold ${errors.accidentDate ? 'text-amber-700' : 'text-stone-900'}`}>
+                  事故日期 <span className="text-amber-500">*</span>
                 </label>
                 <input
                   type="date"
-                  className={`w-full border-2 rounded-xl px-5 py-4 focus:outline-none transition-all text-lg font-medium ${errors.accidentDate ? 'border-red-300 bg-red-50 focus:border-red-500' : 'border-stone-200 focus:border-stone-900 bg-stone-50 focus:bg-white'}`}
+                  className={`w-full border-2 rounded-xl px-5 py-4 focus:outline-none transition-all text-lg font-medium ${errors.accidentDate ? 'border-amber-300 bg-amber-50 focus:border-amber-500' : 'border-stone-200 focus:border-stone-900 bg-stone-50 focus:bg-white'}`}
                   value={formState.accidentDate}
                   onChange={(e) => {
                     setFormState(prev => ({ ...prev, accidentDate: e.target.value }));
@@ -234,7 +234,7 @@ const App: React.FC = () => {
                   }}
                 />
                 {errors.accidentDate && (
-                  <p className="text-red-600 text-sm flex items-center gap-1 font-bold">
+                  <p className="text-amber-700 text-sm flex items-center gap-1 font-bold">
                     <AlertCircle size={14} /> {errors.accidentDate}
                   </p>
                 )}
@@ -245,7 +245,7 @@ const App: React.FC = () => {
             <div className="flex justify-end no-print">
               <button
                 onClick={() => navigateTo('medical')}
-                className="text-stone-900 hover:text-red-600 text-base font-bold flex items-center gap-2 group bg-white px-5 py-3 rounded-xl border-2 border-stone-200 transition-all hover:border-red-200 shadow-sm"
+                className="text-stone-900 hover:text-blue-700 text-base font-bold flex items-center gap-2 group bg-white px-5 py-3 rounded-xl border-2 border-stone-100 transition-all hover:border-blue-100 shadow-sm"
               >
                 <Calculator size={18} />
                 進入醫療明細計算機
@@ -326,7 +326,7 @@ const App: React.FC = () => {
             <span className="text-stone-500 font-bold text-sm uppercase tracking-wide">
               {viewMode === 'medical' ? '醫療總計' : '求償總額'}
             </span>
-            <span className={`text-3xl font-black tabular-nums tracking-tight ${viewMode === 'medical' ? 'text-blue-600' : 'text-red-600'}`}>
+            <span className={`text-3xl font-black tabular-nums tracking-tight ${viewMode === 'medical' ? 'text-blue-600' : 'text-stone-900'}`}>
               NT$ {(viewMode === 'medical' ? medicalTotal : totalClaimAmount).toLocaleString()}
             </span>
           </div>
@@ -355,7 +355,7 @@ const App: React.FC = () => {
                 </button>
                 <button
                   onClick={handleExportPDF}
-                  className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-3.5 rounded-xl font-bold text-lg transition-all hover:scale-[1.02] shadow-lg shadow-red-200"
+                  className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-blue-900 hover:bg-black text-white px-8 py-3.5 rounded-xl font-bold text-lg transition-all hover:scale-[1.02] shadow-xl shadow-blue-100"
                 >
                   <Download size={20} /> 下載 PDF
                 </button>

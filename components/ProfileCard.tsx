@@ -3,43 +3,44 @@ import { UserCheck, MessageCircle, Phone, ArrowRight } from 'lucide-react';
 
 const ProfileCard: React.FC = () => {
   return (
-    <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl shadow-xl overflow-hidden text-white mt-12 mb-8">
-      <div className="p-8 md:p-10 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+    <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden text-stone-900 mt-12 mb-8 border border-stone-100 relative group">
+      {/* Decorative background element */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-40 -mr-32 -mt-32"></div>
+
+      <div className="p-8 md:p-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 relative z-10">
         {/* Avatar / Brand Image */}
         <div className="shrink-0 relative">
-          <div className="w-24 h-24 md:w-32 md:h-32 bg-slate-700 rounded-full border-4 border-slate-600 flex items-center justify-center overflow-hidden shadow-2xl relative z-10">
-            <UserCheck size={48} className="text-slate-400" />
-            {/* Placeholder for real headshot */}
-            {/* <img src="/path-to-expert.jpg" alt="車禍理賠專家" className="w-full h-full object-cover" /> */}
+          <div className="w-24 h-24 md:w-32 md:h-32 bg-stone-900 rounded-full flex items-center justify-center overflow-hidden shadow-2xl relative z-10 transition-transform group-hover:scale-105 duration-500">
+            <UserCheck size={48} className="text-white" />
           </div>
-          <div className="absolute -inset-4 bg-blue-500/20 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute -inset-4 bg-stone-200/50 rounded-full blur-xl animate-pulse"></div>
         </div>
 
         {/* Content */}
-        <div className="flex-1 text-center md:text-left space-y-4">
+        <div className="flex-1 text-center md:text-left space-y-5">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/50 border border-blue-700 text-blue-300 text-xs font-bold tracking-wider uppercase mb-3">
-              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-bold tracking-wider uppercase mb-4">
+              <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
               Available for Consultation
             </div>
-            <h3 className="text-2xl md:text-3xl font-bold font-serif mb-2">
+            <h3 className="text-2xl md:text-3xl font-black text-stone-900 mb-3 tracking-tight">
               試算結果太複雜？讓專家為您把關
             </h3>
-            <p className="text-slate-300 leading-relaxed max-w-xl mx-auto md:mx-0">
+            <p className="text-stone-500 leading-relaxed max-w-xl mx-auto md:mx-0 text-lg font-medium">
               車禍理賠魔鬼藏在細節裡。我們提供一對一的個人化諮詢，協助您檢視對方保險公司的報價是否合理，確保您的權益不被低估。
             </p>
           </div>
 
           {/* CTA Actions */}
-          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-2">
-            <button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#06c755] hover:bg-[#05b54c] text-white px-6 py-3.5 rounded-xl font-bold transition-all shadow-lg active:scale-95 group">
-              <MessageCircle size={20} />
+          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
+            <button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#06c755] hover:bg-[#05b54c] text-white px-8 py-4 rounded-2xl font-bold transition-all shadow-lg shadow-green-100 active:scale-95 group/btn">
+              <MessageCircle size={22} />
               加入 LINE 官方帳號諮詢
-              <ArrowRight size={16} className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+              <ArrowRight size={18} className="opacity-0 -ml-2 group-hover/btn:opacity-100 group-hover/btn:ml-0 transition-all" />
             </button>
-            <button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white text-slate-900 hover:bg-slate-100 px-6 py-3.5 rounded-xl font-bold transition-all shadow-lg active:scale-95 border border-slate-200">
-              <Phone size={18} />
-              預約 15 分鐘電話評估
+            <button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white text-stone-800 hover:text-stone-900 hover:bg-stone-50 px-8 py-4 rounded-2xl font-bold transition-all shadow-sm active:scale-95 border-2 border-stone-200">
+              <Phone size={20} />
+              預約電話評估
             </button>
           </div>
         </div>

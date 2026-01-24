@@ -33,7 +33,7 @@ const OtherItemsSection: React.FC<OtherItemsSectionProps> = ({ items, onUpdate }
         <section className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden mb-6 transition-all hover:shadow-md">
             <div className="bg-slate-50 px-6 py-4 border-b border-slate-100 flex justify-between items-center">
                 <div className="flex items-center gap-3">
-                    <div className="bg-orange-100 p-2 rounded-lg text-orange-600">
+                    <div className="bg-blue-50 p-2 rounded-lg text-blue-900">
                         <Plus size={20} />
                     </div>
                     <div>
@@ -43,7 +43,7 @@ const OtherItemsSection: React.FC<OtherItemsSectionProps> = ({ items, onUpdate }
                 </div>
                 <div className="text-right">
                     <p className="text-xs text-slate-500 mb-1">本項小計</p>
-                    <p className="text-xl font-bold text-orange-600 font-mono">
+                    <p className="text-xl font-bold text-blue-900 font-mono">
                         {totalAmount.toLocaleString()}
                     </p>
                 </div>
@@ -81,7 +81,7 @@ const OtherItemsSection: React.FC<OtherItemsSectionProps> = ({ items, onUpdate }
                         </div>
                         <button
                             onClick={() => handleRemoveItem(item.id)}
-                            className="mt-6 p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                            className="mt-6 p-2 text-stone-300 hover:text-stone-900 hover:bg-stone-50 rounded-lg transition-colors"
                             title="移除此項目"
                         >
                             <Trash2 size={18} />

@@ -56,9 +56,9 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
       {isGenerating && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6 text-center">
           <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-sm w-full animate-in zoom-in-95">
-            <Loader2 className="w-12 h-12 text-blue-600 animate-spin mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-slate-800 mb-2">正在產製專業 PDF</h3>
-            <p className="text-slate-500 text-sm leading-relaxed">
+            <Loader2 className="w-12 h-12 text-blue-900 animate-spin mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-stone-800 mb-2">正在產製專業 PDF</h3>
+            <p className="text-stone-500 text-sm leading-relaxed">
               請稍候，系統正在為您排版並優化文件畫質...<br />這可能需要幾秒鐘的時間。
             </p>
           </div>
@@ -72,7 +72,7 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
         >
           <ArrowLeft size={20} /> 返回修改資料
         </button>
-        <div className="flex items-center gap-2 text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full text-sm font-bold border border-blue-100">
+        <div className="flex items-center gap-2 text-blue-900 bg-blue-50 px-4 py-1.5 rounded-full text-sm font-bold border border-blue-100">
           <FileText size={16} /> 您正在查看 PDF 預覽
         </div>
       </div>
@@ -157,13 +157,13 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
             })()
           )}
 
-          <div className="border-t-4 border-slate-900 pt-6 mt-12 flex justify-between items-center">
-            <span className="text-2xl font-black text-slate-800">預估總求償金額</span>
+          <div className="border-t-4 border-stone-900 pt-6 mt-12 flex justify-between items-center">
+            <span className="text-2xl font-black text-stone-800">預估總求償金額</span>
             <div className="text-right">
-              <span className="text-3xl font-black text-blue-700 font-mono">
+              <span className="text-3xl font-black text-blue-900 font-mono">
                 NT$ {totalAmount.toLocaleString()}
               </span>
-              <p className="text-xs text-slate-400 mt-1 italic">（此金額僅供參考，詳見下方說明）</p>
+              <p className="text-xs text-stone-400 mt-1 italic">（此金額僅供參考，詳見下方說明）</p>
             </div>
           </div>
 
@@ -201,7 +201,7 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
         <button
           onClick={handleDownloadPDF}
           disabled={isGenerating}
-          className="flex items-center justify-center gap-3 bg-blue-700 hover:bg-blue-800 text-white px-10 py-4 rounded-2xl font-black text-xl shadow-xl transform transition-all hover:scale-105 active:scale-95 shadow-blue-200 disabled:opacity-50"
+          className="flex items-center justify-center gap-3 bg-blue-900 hover:bg-black text-white px-10 py-4 rounded-2xl font-black text-xl shadow-2xl transform transition-all hover:scale-105 active:scale-95 shadow-blue-100 disabled:opacity-50"
         >
           {isGenerating ? (
             <Loader2 className="animate-spin" size={24} />
