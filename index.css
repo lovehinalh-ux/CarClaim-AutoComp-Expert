@@ -2,22 +2,20 @@
 
 @layer base {
     :root {
-        /* Brand Colors - Professional Navy & Gold */
-        --color-brand-primary: #1e3a8a;
-        /* Deep Royal Blue */
-        --color-brand-secondary: #d4af37;
-        /* Muted Gold for accents */
-        --color-brand-surface: #fafaf9;
-        /* Stone-50 */
-        --color-brand-gold: #B8860B;
-        --color-brand-gold-light: #F5F5DC;
+        /* Brand Colors - Strict Design Refinement */
+        --color-brand-background: #F5E6D3;
+        --color-brand-surface: #FFF9F0;
+        --color-brand-primary: #C97A2B;
+        --color-brand-secondary: #3A2A1E;
+        --color-brand-muted: #8A6F55;
+        --color-brand-border: #E6D5C3;
     }
 
     body {
         font-family: 'Noto Serif TC', serif;
         /* Switch to Serif for headings */
-        background-color: var(--color-brand-surface);
-        color: #1e293b;
+        background-color: var(--color-brand-background);
+        color: var(--color-brand-secondary);
     }
 
     h1,

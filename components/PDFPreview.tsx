@@ -56,11 +56,11 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
     <div className="animate-in zoom-in-95 duration-300">
       {/* Loading Overlay */}
       {isGenerating && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6 text-center">
-          <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-sm w-full animate-in zoom-in-95">
-            <Loader2 className="w-12 h-12 text-blue-900 animate-spin mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-stone-800 mb-2">正在產製專業 PDF</h3>
-            <p className="text-stone-500 text-sm leading-relaxed">
+        <div className="fixed inset-0 bg-[var(--color-brand-secondary)]/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6 text-center">
+          <div className="bg-[var(--color-brand-surface)] p-8 rounded-3xl shadow-2xl max-w-sm w-full animate-in zoom-in-95 border border-[var(--color-brand-border)]">
+            <Loader2 className="w-12 h-12 text-[var(--color-brand-primary)] animate-spin mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-[var(--color-brand-secondary)] mb-2">正在產製專業 PDF</h3>
+            <p className="text-[var(--color-brand-muted)] text-sm leading-relaxed">
               請稍候，系統正在為您排版並優化文件畫質...<br />這可能需要幾秒鐘的時間。
             </p>
           </div>
@@ -70,11 +70,11 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
       <div className="flex items-center justify-between mb-6 no-print">
         <button
           onClick={onBack}
-          className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 rounded-xl font-bold transition-all shadow-sm"
+          className="flex items-center gap-2 px-4 py-2 bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] rounded-xl font-bold transition-all shadow-sm"
         >
-          <ArrowLeft size={20} /> 返回修改資料
+          <ArrowLeft size={18} /> 返回修改資料
         </button>
-        <div className="flex items-center gap-2 text-blue-900 bg-blue-50 px-4 py-1.5 rounded-full text-sm font-bold border border-blue-100">
+        <div className="flex items-center gap-2 text-[var(--color-brand-muted)] bg-[var(--color-brand-surface)] px-4 py-1.5 rounded-full text-sm font-bold border border-[var(--color-brand-border)]">
           <FileText size={16} /> 您正在查看 PDF 預覽
         </div>
       </div>
@@ -84,9 +84,9 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
         ref={pdfRef}
         className="bg-white shadow-2xl border border-stone-200 p-6 md:p-8 min-h-[842px] mx-auto max-w-[595px] text-stone-800 pdf-content origin-top transform scale-95 text-[11px]"
       >
-        <div className="text-center border-b-2 border-slate-900 pb-8 mb-10">
+        <div className="text-center border-b-2 border-[var(--color-brand-primary)] pb-8 mb-10">
           <h1 className="text-3xl font-black mb-2 tracking-tight">車禍事故求償一覽表</h1>
-          <div className="flex flex-wrap justify-center gap-x-12 gap-y-2 text-lg mt-4 text-slate-700">
+          <div className="flex flex-wrap justify-center gap-x-12 gap-y-2 text-lg mt-4 text-[var(--color-brand-primary)]">
             <p><span className="font-bold">求償人：</span>{claimantName || '（未填寫）'}</p>
             <p><span className="font-bold">事故日期：</span>{accidentDate || '（未填寫）'}</p>
           </div>
@@ -100,21 +100,21 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
 
             return (
               <div key={category} className="mb-6">
-                <h2 className="text-lg font-bold mb-2 border-l-4 border-slate-800 pl-3">{category}</h2>
+                <h2 className="text-lg font-bold mb-2 border-l-4 border-[var(--color-brand-primary)] pl-3">{category}</h2>
                 <table className="w-full border-collapse text-sm">
                   <thead>
-                    <tr className="bg-slate-100">
-                      <th className="border border-slate-300 px-4 py-2 text-left">請求項目</th>
-                      <th className="border border-slate-300 px-4 py-2 text-right w-40">金額 (NT$)</th>
+                    <tr className="bg-[var(--color-brand-surface)]">
+                      <th className="border border-[var(--color-brand-border)] px-4 py-2 text-left">請求項目</th>
+                      <th className="border border-[var(--color-brand-border)] px-4 py-2 text-right w-40">金額 (NT$)</th>
                     </tr>
                   </thead>
                   <tbody>
                     {categoryItems.map(item => (
                       <tr key={item.id}>
-                        <td className="border border-slate-300 px-4 py-2 text-slate-700">
+                        <td className="border border-[var(--color-brand-border)] px-4 py-2 text-[var(--color-brand-muted)]">
                           <p className="font-medium">{item.name}</p>
                         </td>
-                        <td className="border border-slate-300 px-4 py-2 text-right font-mono font-bold">
+                        <td className="border border-[var(--color-brand-border)] px-4 py-2 text-right font-mono font-bold">
                           {item.amount.toLocaleString()}
                         </td>
                       </tr>
@@ -133,21 +133,21 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
 
               return (
                 <div className="mb-6">
-                  <h2 className="text-lg font-bold mb-2 border-l-4 border-slate-800 pl-3">其他求償項目</h2>
+                  <h2 className="text-lg font-bold mb-2 border-l-4 border-[var(--color-brand-primary)] pl-3">其他求償項目</h2>
                   <table className="w-full border-collapse text-sm">
                     <thead>
-                      <tr className="bg-slate-100">
-                        <th className="border border-slate-300 px-4 py-2 text-left">請求項目</th>
-                        <th className="border border-slate-300 px-4 py-2 text-right w-40">金額 (NT$)</th>
+                      <tr className="bg-[var(--color-brand-surface)]">
+                        <th className="border border-[var(--color-brand-border)] px-4 py-2 text-left">請求項目</th>
+                        <th className="border border-[var(--color-brand-border)] px-4 py-2 text-right w-40">金額 (NT$)</th>
                       </tr>
                     </thead>
                     <tbody>
                       {activeCustomItems.map(item => (
                         <tr key={item.id}>
-                          <td className="border border-slate-300 px-4 py-2 text-slate-700">
+                          <td className="border border-[var(--color-brand-border)] px-4 py-2 text-[var(--color-brand-muted)]">
                             <p className="font-medium">{item.name || '（未命名項目）'}</p>
                           </td>
-                          <td className="border border-slate-300 px-4 py-2 text-right font-mono font-bold">
+                          <td className="border border-[var(--color-brand-border)] px-4 py-2 text-right font-mono font-bold">
                             {(item.amount || 0).toLocaleString()}
                           </td>
                         </tr>
@@ -159,10 +159,10 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
             })()
           )}
 
-          <div className="border-t-4 border-stone-900 pt-6 mt-12 flex justify-between items-center">
-            <span className="text-2xl font-black text-stone-800">預估總求償金額</span>
+          <div className="border-t-4 border-[var(--color-brand-secondary)] pt-6 mt-12 flex justify-between items-center">
+            <span className="text-2xl font-bold text-[var(--color-brand-secondary)]">預估總求償金額</span>
             <div className="text-right">
-              <span className="text-3xl font-black text-blue-900 font-mono">
+              <span className="text-3xl font-bold text-[var(--color-brand-primary)] font-mono">
                 NT$ {totalAmount.toLocaleString()}
               </span>
               <p className="text-xs text-stone-400 mt-1 italic">（此金額僅供參考，詳見下方說明）</p>
@@ -183,30 +183,30 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
         {/* Page Break for Medical Details */}
         {medicalEntries.filter(e => e.amount > 0).length > 0 && (
           <div className="mt-10" style={{ pageBreakBefore: 'always' }}>
-            <div className="text-center border-b-2 border-stone-900 pb-4 mb-8">
+            <div className="text-center border-b-2 border-[var(--color-brand-primary)] pb-4 mb-8">
               <h2 className="text-xl font-black">醫療費用詳情附件</h2>
-              <p className="text-[10px] text-stone-500 mt-2">求償人：{claimantName} | 事故日期：{accidentDate}</p>
+              <p className="text-[10px] text-[var(--color-brand-muted)] mt-2">求償人：{claimantName} | 事故日期：{accidentDate}</p>
             </div>
 
             <table className="w-full border-collapse text-[10px]">
               <thead>
-                <tr className="bg-stone-100">
-                  <th className="border border-stone-300 px-3 py-2 text-left w-12">序號</th>
-                  <th className="border border-stone-300 px-3 py-2 text-left">就醫日期</th>
-                  <th className="border border-stone-300 px-3 py-2 text-right">金額 (NT$)</th>
+                <tr className="bg-[var(--color-brand-surface)]">
+                  <th className="border border-[var(--color-brand-border)] px-3 py-2 text-left w-12">序號</th>
+                  <th className="border border-[var(--color-brand-border)] px-3 py-2 text-left">就醫日期</th>
+                  <th className="border border-[var(--color-brand-border)] px-3 py-2 text-right">金額 (NT$)</th>
                 </tr>
               </thead>
               <tbody>
                 {medicalEntries.filter(e => e.amount > 0).map((entry, idx) => (
                   <tr key={entry.id}>
-                    <td className="border border-stone-300 px-3 py-2 text-center text-stone-500">{idx + 1}</td>
-                    <td className="border border-stone-300 px-3 py-2">{entry.date || '未填寫'}</td>
-                    <td className="border border-stone-300 px-3 py-2 text-right font-mono font-bold">{entry.amount.toLocaleString()}</td>
+                    <td className="border border-[var(--color-brand-border)] px-3 py-2 text-center text-[var(--color-brand-muted)]">{idx + 1}</td>
+                    <td className="border border-[var(--color-brand-border)] px-3 py-2">{entry.date || '未填寫'}</td>
+                    <td className="border border-[var(--color-brand-border)] px-3 py-2 text-right font-mono font-bold">{entry.amount.toLocaleString()}</td>
                   </tr>
                 ))}
-                <tr className="bg-stone-50 font-black">
-                  <td colSpan={2} className="border border-stone-300 px-3 py-2 text-right">醫療費用總計</td>
-                  <td className="border border-stone-300 px-3 py-2 text-right text-blue-900">
+                <tr className="bg-[var(--color-brand-surface)] font-black">
+                  <td colSpan={2} className="border border-[var(--color-brand-border)] px-3 py-2 text-right">醫療費用總計</td>
+                  <td className="border border-[var(--color-brand-border)] px-3 py-2 text-right text-[var(--color-brand-secondary)]">
                     NT$ {medicalEntries.reduce((s, e) => s + e.amount, 0).toLocaleString()}
                   </td>
                 </tr>
@@ -226,14 +226,14 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
         <button
           onClick={onBack}
           disabled={isGenerating}
-          className="flex items-center justify-center gap-3 bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50 px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-md active:scale-95 disabled:opacity-50"
+          className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-sm active:scale-95 disabled:opacity-50"
         >
           <ArrowLeft size={24} /> 點擊返回修改內容
         </button>
         <button
           onClick={handleDownloadPDF}
           disabled={isGenerating}
-          className="flex items-center justify-center gap-3 bg-blue-900 hover:bg-black text-white px-10 py-4 rounded-2xl font-black text-xl shadow-2xl transform transition-all hover:scale-105 active:scale-95 shadow-blue-100 disabled:opacity-50"
+          className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-[var(--color-brand-primary)] hover:opacity-90 text-white px-10 py-4 rounded-2xl font-black text-xl shadow-2xl transition-all active:scale-95 shadow-[var(--color-brand-primary)]/10 disabled:opacity-50"
         >
           {isGenerating ? (
             <Loader2 className="animate-spin" size={24} />
@@ -245,7 +245,7 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
         <button
           onClick={onPrint}
           disabled={isGenerating}
-          className="flex items-center justify-center gap-3 bg-slate-800 hover:bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-lg active:scale-95 disabled:opacity-50"
+          className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-[var(--color-brand-secondary)] hover:opacity-90 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-lg active:scale-95 disabled:opacity-50"
         >
           <Printer size={24} /> 直接列印
         </button>
