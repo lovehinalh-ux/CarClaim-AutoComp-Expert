@@ -2,26 +2,20 @@
 
 @layer base {
     :root {
-        /* Brand Colors - Professional Warm Theme */
-        --color-brand-primary: #3A2A1E;
-        /* Deep Brown for Headings */
-        --color-brand-secondary: #C97A2B;
-        /* Amber for accents */
+        /* Brand Colors - Strict Design Refinement */
+        --color-brand-background: #F5E6D3;
         --color-brand-surface: #FFF9F0;
-        /* Warm Ivory/Beige */
-        --color-brand-card: #FFFFFF;
-        /* Pure White for cards */
-        --color-brand-muted: #8C7159;
-        /* Medium Brown for text */
-        --color-brand-border: #F2EBE0;
-        /* Subtle Tan border */
+        --color-brand-primary: #C97A2B;
+        --color-brand-secondary: #3A2A1E;
+        --color-brand-muted: #8A6F55;
+        --color-brand-border: #E6D5C3;
     }
 
     body {
         font-family: 'Noto Serif TC', serif;
         /* Switch to Serif for headings */
-        background-color: var(--color-brand-surface);
-        color: var(--color-brand-primary);
+        background-color: var(--color-brand-background);
+        color: var(--color-brand-secondary);
     }
 
     h1,

@@ -29,8 +29,8 @@ const MedicalDetailsTable: React.FC<Props> = ({ entries, onEntryChange, onAddRow
   };
 
   return (
-    <div className="bg-[var(--color-brand-card)] rounded-2xl shadow-xl border border-[var(--color-brand-border)] overflow-hidden">
-      <div className="bg-[var(--color-brand-primary)] p-6 flex items-center justify-between text-white">
+    <div className="bg-[var(--color-brand-surface)] rounded-2xl shadow-xl border border-[var(--color-brand-border)] overflow-hidden">
+      <div className="bg-[var(--color-brand-secondary)] p-6 flex items-center justify-between text-white">
         <div className="flex items-center gap-4">
           <button
             onClick={onBack}
@@ -43,7 +43,7 @@ const MedicalDetailsTable: React.FC<Props> = ({ entries, onEntryChange, onAddRow
         </div>
         <div className="text-right">
           <p className="text-white/70 text-xs uppercase tracking-wider mb-1">目前總計</p>
-          <p className="text-2xl font-black text-[var(--color-brand-secondary)]">NT$ {total.toLocaleString()}</p>
+          <p className="text-2xl font-bold text-[var(--color-brand-primary)]">NT$ {total.toLocaleString()}</p>
         </div>
       </div>
 
@@ -116,7 +116,7 @@ const MedicalDetailsTable: React.FC<Props> = ({ entries, onEntryChange, onAddRow
                   <td className="px-6 py-4 text-center">
                     <button
                       onClick={() => onRemoveRow(entry.id)}
-                      className="text-stone-300 hover:text-stone-900 hover:bg-stone-50 rounded-full transition-all p-2"
+                      className="text-[var(--color-brand-muted)]/30 hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] rounded-full transition-all p-2"
                       title="刪除此列"
                     >
                       <Trash2 size={18} />
@@ -138,7 +138,7 @@ const MedicalDetailsTable: React.FC<Props> = ({ entries, onEntryChange, onAddRow
         </button>
         <button
           onClick={onBack}
-          className="bg-[var(--color-brand-primary)] text-white px-8 py-2.5 rounded-lg font-bold hover:bg-black transition-all shadow-md active:scale-95"
+          className="bg-[var(--color-brand-primary)] text-white px-8 py-2.5 rounded-lg font-bold hover:bg-[var(--color-brand-secondary)] transition-all shadow-md active:scale-95"
         >
           完成並返回一覽表
         </button>

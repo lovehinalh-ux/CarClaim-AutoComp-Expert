@@ -165,19 +165,19 @@ const App: React.FC = () => {
         <div className="flex bg-[var(--color-brand-border)]/30 p-1.5 rounded-2xl mb-10 no-print border border-[var(--color-brand-border)]">
           <button
             onClick={() => navigateTo('summary')}
-            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'summary' ? 'bg-[var(--color-brand-card)] shadow-sm text-[var(--color-brand-primary)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-primary)] hover:bg-[var(--color-brand-card)]/50'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'summary' ? 'bg-[var(--color-brand-surface)] shadow-sm text-[var(--color-brand-secondary)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-surface)]/50'}`}
           >
             <ClipboardList size={20} /> 求償一覽表
           </button>
           <button
             onClick={() => navigateTo('medical')}
-            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'medical' ? 'bg-[var(--color-brand-card)] shadow-sm text-[var(--color-brand-secondary)] border border-[var(--color-brand-border)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-primary)] hover:bg-[var(--color-brand-card)]/50'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'medical' ? 'bg-[var(--color-brand-surface)] shadow-sm text-[var(--color-brand-primary)] border border-[var(--color-brand-border)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-surface)]/50'}`}
           >
             <Stethoscope size={20} /> 醫療明細
           </button>
           <button
             onClick={() => navigateTo('preview')}
-            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'preview' ? 'bg-[var(--color-brand-card)] shadow-sm text-[var(--color-brand-primary)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-primary)] hover:bg-[var(--color-brand-card)]/50'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'preview' ? 'bg-[var(--color-brand-surface)] shadow-sm text-[var(--color-brand-secondary)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-surface)]/50'}`}
           >
             <Eye size={20} /> 預覽輸出
           </button>
@@ -245,7 +245,7 @@ const App: React.FC = () => {
             <div className="flex justify-end no-print">
               <button
                 onClick={() => navigateTo('medical')}
-                className="text-[var(--color-brand-primary)] hover:text-[var(--color-brand-secondary)] text-base font-bold flex items-center gap-2 group bg-[var(--color-brand-card)] px-5 py-3 rounded-xl border border-[var(--color-brand-border)] transition-all hover:border-[var(--color-brand-secondary)] shadow-sm"
+                className="text-[var(--color-brand-secondary)] hover:text-[var(--color-brand-primary)] text-base font-bold flex items-center gap-2 group bg-[var(--color-brand-surface)] px-5 py-3 rounded-xl border border-[var(--color-brand-border)] transition-all hover:border-[var(--color-brand-primary)] shadow-sm"
               >
                 <Calculator size={18} />
                 進入醫療明細計算機

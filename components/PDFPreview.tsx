@@ -56,9 +56,9 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
     <div className="animate-in zoom-in-95 duration-300">
       {/* Loading Overlay */}
       {isGenerating && (
-        <div className="fixed inset-0 bg-[var(--color-brand-primary)]/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6 text-center">
-          <div className="bg-[var(--color-brand-card)] p-8 rounded-3xl shadow-2xl max-w-sm w-full animate-in zoom-in-95">
-            <Loader2 className="w-12 h-12 text-[var(--color-brand-secondary)] animate-spin mx-auto mb-4" />
+        <div className="fixed inset-0 bg-[var(--color-brand-secondary)]/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6 text-center">
+          <div className="bg-[var(--color-brand-surface)] p-8 rounded-3xl shadow-2xl max-w-sm w-full animate-in zoom-in-95">
+            <Loader2 className="w-12 h-12 text-[var(--color-brand-primary)] animate-spin mx-auto mb-4" />
             <h3 className="text-xl font-bold text-stone-800 mb-2">正在產製專業 PDF</h3>
             <p className="text-stone-500 text-sm leading-relaxed">
               請稍候，系統正在為您排版並優化文件畫質...<br />這可能需要幾秒鐘的時間。
@@ -159,10 +159,10 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
             })()
           )}
 
-          <div className="border-t-4 border-[var(--color-brand-primary)] pt-6 mt-12 flex justify-between items-center">
-            <span className="text-2xl font-black text-[var(--color-brand-primary)]">預估總求償金額</span>
+          <div className="border-t-4 border-[var(--color-brand-secondary)] pt-6 mt-12 flex justify-between items-center">
+            <span className="text-2xl font-bold text-[var(--color-brand-secondary)]">預估總求償金額</span>
             <div className="text-right">
-              <span className="text-3xl font-black text-[var(--color-brand-secondary)] font-mono">
+              <span className="text-3xl font-bold text-[var(--color-brand-primary)] font-mono">
                 NT$ {totalAmount.toLocaleString()}
               </span>
               <p className="text-xs text-stone-400 mt-1 italic">（此金額僅供參考，詳見下方說明）</p>
