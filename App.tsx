@@ -154,7 +154,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen pb-40 bg-stone-50">
+    <div className="min-h-screen pb-40 bg-[var(--color-brand-surface)] text-[var(--color-brand-primary)]">
       <SEO />
       <div className="no-print">
         <Header />
@@ -162,22 +162,22 @@ const App: React.FC = () => {
 
       <main className="max-w-4xl mx-auto px-6 md:px-8 py-8">
         {/* Navigation Tabs (Swiss Style) */}
-        <div className="flex bg-stone-200/50 p-1.5 rounded-2xl mb-10 no-print">
+        <div className="flex bg-[var(--color-brand-border)]/30 p-1.5 rounded-2xl mb-10 no-print border border-[var(--color-brand-border)]">
           <button
             onClick={() => navigateTo('summary')}
-            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'summary' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-500 hover:text-stone-700 hover:bg-stone-100'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'summary' ? 'bg-[var(--color-brand-card)] shadow-sm text-[var(--color-brand-primary)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-primary)] hover:bg-[var(--color-brand-card)]/50'}`}
           >
             <ClipboardList size={20} /> 求償一覽表
           </button>
           <button
             onClick={() => navigateTo('medical')}
-            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'medical' ? 'bg-white shadow-sm text-blue-700 border-2 border-stone-200' : 'text-stone-500 hover:text-stone-700 hover:bg-stone-100'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'medical' ? 'bg-[var(--color-brand-card)] shadow-sm text-[var(--color-brand-secondary)] border border-[var(--color-brand-border)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-primary)] hover:bg-[var(--color-brand-card)]/50'}`}
           >
             <Stethoscope size={20} /> 醫療明細
           </button>
           <button
             onClick={() => navigateTo('preview')}
-            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'preview' ? 'bg-white shadow-sm text-stone-900' : 'text-stone-500 hover:text-stone-700 hover:bg-stone-100'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'preview' ? 'bg-[var(--color-brand-card)] shadow-sm text-[var(--color-brand-primary)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-primary)] hover:bg-[var(--color-brand-card)]/50'}`}
           >
             <Eye size={20} /> 預覽輸出
           </button>
@@ -186,13 +186,13 @@ const App: React.FC = () => {
         {viewMode === 'summary' && (
           <div className="space-y-10 animate-in fade-in duration-500">
             {/* Action Bar */}
-            <div className="flex justify-between items-center no-print border-b border-stone-200 pb-4">
-              <h2 className="text-3xl font-black text-stone-900 flex items-center gap-3 tracking-tight">
-                <User size={28} className="text-stone-900" /> 基本資訊
+            <div className="flex justify-between items-center no-print border-b border-[var(--color-brand-border)] pb-4">
+              <h2 className="text-3xl font-black text-[var(--color-brand-primary)] flex items-center gap-3 tracking-tight">
+                <User size={28} className="text-[var(--color-brand-primary)]" /> 基本資訊
               </h2>
               <button
                 onClick={handleReset}
-                className="flex items-center gap-2 px-5 py-2.5 text-stone-500 hover:bg-stone-50 rounded-xl transition-colors font-bold border-2 border-stone-100"
+                className="flex items-center gap-2 px-5 py-2.5 text-[var(--color-brand-muted)] hover:bg-[var(--color-brand-surface)] rounded-xl transition-colors font-bold border border-[var(--color-brand-border)]"
               >
                 <Trash2 size={18} /> 清除重填
               </button>
@@ -207,7 +207,7 @@ const App: React.FC = () => {
                 <input
                   type="text"
                   placeholder="請輸入姓名"
-                  className={`w-full border-2 rounded-xl px-5 py-4 focus:outline-none transition-all text-lg font-medium ${errors.claimantName ? 'border-amber-300 bg-amber-50 focus:border-amber-500' : 'border-stone-200 focus:border-stone-900 bg-stone-50 focus:bg-white'}`}
+                  className={`w-full border-2 rounded-xl px-5 py-4 focus:outline-none transition-all text-lg font-medium ${errors.claimantName ? 'border-amber-300 bg-amber-50 focus:border-amber-500' : 'border-[var(--color-brand-border)] focus:border-[var(--color-brand-secondary)] bg-[var(--color-brand-card)] focus:bg-white'}`}
                   value={formState.claimantName}
                   onChange={(e) => {
                     setFormState(prev => ({ ...prev, claimantName: e.target.value }));
@@ -226,7 +226,7 @@ const App: React.FC = () => {
                 </label>
                 <input
                   type="date"
-                  className={`w-full border-2 rounded-xl px-5 py-4 focus:outline-none transition-all text-lg font-medium ${errors.accidentDate ? 'border-amber-300 bg-amber-50 focus:border-amber-500' : 'border-stone-200 focus:border-stone-900 bg-stone-50 focus:bg-white'}`}
+                  className={`w-full border-2 rounded-xl px-5 py-4 focus:outline-none transition-all text-lg font-medium ${errors.accidentDate ? 'border-amber-300 bg-amber-50 focus:border-amber-500' : 'border-[var(--color-brand-border)] focus:border-[var(--color-brand-secondary)] bg-[var(--color-brand-card)] focus:bg-white'}`}
                   value={formState.accidentDate}
                   onChange={(e) => {
                     setFormState(prev => ({ ...prev, accidentDate: e.target.value }));
@@ -245,7 +245,7 @@ const App: React.FC = () => {
             <div className="flex justify-end no-print">
               <button
                 onClick={() => navigateTo('medical')}
-                className="text-stone-900 hover:text-blue-700 text-base font-bold flex items-center gap-2 group bg-white px-5 py-3 rounded-xl border-2 border-stone-100 transition-all hover:border-blue-100 shadow-sm"
+                className="text-[var(--color-brand-primary)] hover:text-[var(--color-brand-secondary)] text-base font-bold flex items-center gap-2 group bg-[var(--color-brand-card)] px-5 py-3 rounded-xl border border-[var(--color-brand-border)] transition-all hover:border-[var(--color-brand-secondary)] shadow-sm"
               >
                 <Calculator size={18} />
                 進入醫療明細計算機
@@ -335,14 +335,14 @@ const App: React.FC = () => {
             {viewMode === 'summary' ? (
               <button
                 onClick={() => navigateTo('preview')}
-                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-stone-900 text-white px-6 py-3.5 rounded-xl font-bold text-lg transition-all hover:bg-black hover:scale-[1.02] active:scale-95 shadow-lg shadow-stone-200"
+                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[var(--color-brand-primary)] text-white px-6 py-3.5 rounded-xl font-bold text-lg transition-all hover:bg-black hover:scale-[1.02] active:scale-95 shadow-lg shadow-[var(--color-brand-muted)]/20"
               >
                 <Eye size={20} /> 預覽並輸出
               </button>
             ) : viewMode === 'medical' ? (
               <button
                 onClick={() => navigateTo('summary')}
-                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-stone-900 text-white px-6 py-3.5 rounded-xl font-bold text-lg transition-all hover:bg-black hover:scale-[1.02] active:scale-95 shadow-lg shadow-stone-200"
+                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[var(--color-brand-primary)] text-white px-6 py-3.5 rounded-xl font-bold text-lg transition-all hover:bg-black hover:scale-[1.02] active:scale-95 shadow-lg shadow-[var(--color-brand-muted)]/20"
               >
                 完成計算
               </button>
@@ -356,7 +356,7 @@ const App: React.FC = () => {
                 </button>
                 <button
                   onClick={handleExportPDF}
-                  className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-blue-900 hover:bg-black text-white px-8 py-3.5 rounded-xl font-bold text-lg transition-all hover:scale-[1.02] shadow-xl shadow-blue-100"
+                  className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-primary)] text-white px-8 py-3.5 rounded-xl font-bold text-lg transition-all hover:scale-[1.02] shadow-xl shadow-[var(--color-brand-secondary)]/20"
                 >
                   <Download size={20} /> 下載 PDF
                 </button>

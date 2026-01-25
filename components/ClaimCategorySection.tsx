@@ -14,9 +14,9 @@ interface Props {
 const ClaimCategorySection: React.FC<Props> = ({ category, items, onAmountChange, errors }) => {
   return (
     <section className="bg-white rounded-3xl shadow-sm border border-stone-100 overflow-hidden mb-8">
-      <div className="bg-stone-50 px-8 py-5 border-b border-stone-200 flex items-center gap-3">
-        <div className="w-1.5 h-6 bg-blue-900 rounded-full"></div>
-        <h2 className="text-xl font-black text-stone-900 tracking-tight">{category}</h2>
+      <div className="bg-[var(--color-brand-surface)] px-8 py-5 border-b border-[var(--color-brand-border)] flex items-center gap-3">
+        <div className="w-1.5 h-6 bg-[var(--color-brand-secondary)] rounded-full"></div>
+        <h2 className="text-xl font-black text-[var(--color-brand-primary)] tracking-tight">{category}</h2>
       </div>
       <div className="divide-y divide-stone-100">
         {items.map((item) => {
@@ -39,7 +39,7 @@ const ClaimCategorySection: React.FC<Props> = ({ category, items, onAmountChange
                       </div>
                     </div>
                   </div>
-                  <p className="text-base text-stone-500 font-medium hidden md:block">
+                  <p className="text-base text-[var(--color-brand-muted)] font-medium hidden md:block">
                     {item.hint}
                   </p>
 

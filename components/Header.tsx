@@ -2,17 +2,17 @@ import React from 'react';
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-white text-stone-900 py-10 px-6 md:px-8 border-b border-stone-100 shadow-sm mb-10 relative overflow-hidden">
+    <header className="bg-[var(--color-brand-card)] text-[var(--color-brand-primary)] py-10 px-6 md:px-8 border-b border-[var(--color-brand-border)] shadow-sm mb-10 relative overflow-hidden">
       {/* Subtle decorative element */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50/50 rounded-full blur-3xl -mr-16 -mt-16"></div>
+      <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-brand-secondary)]/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
 
       <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left relative z-10">
         <div>
           <h1 className="text-3xl md:text-4xl font-black tracking-tight mb-3 uppercase leading-none">
             Car Compensation<br />
-            <span className="text-blue-900">Calculator</span>
+            <span className="text-[var(--color-brand-secondary)]">Calculator</span>
           </h1>
-          <div className="h-1.5 w-20 bg-blue-900 mb-4 mx-auto md:mx-0 rounded-full"></div>
+          <div className="h-1.5 w-20 bg-[var(--color-brand-secondary)] mb-4 mx-auto md:mx-0 rounded-full"></div>
           <p className="text-stone-500 text-lg font-bold tracking-wide">
             2026 車禍求償一覽表工具
           </p>

@@ -29,12 +29,12 @@ const MedicalDetailsTable: React.FC<Props> = ({ entries, onEntryChange, onAddRow
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl border border-stone-100 overflow-hidden">
-      <div className="bg-blue-900 p-6 flex items-center justify-between text-white">
+    <div className="bg-[var(--color-brand-card)] rounded-2xl shadow-xl border border-[var(--color-brand-border)] overflow-hidden">
+      <div className="bg-[var(--color-brand-primary)] p-6 flex items-center justify-between text-white">
         <div className="flex items-center gap-4">
           <button
             onClick={onBack}
-            className="p-2 hover:bg-slate-700 rounded-full transition-colors"
+            className="p-2 hover:bg-white/10 rounded-full transition-colors"
             title="返回一覽表"
           >
             <ChevronLeft size={24} />
@@ -42,45 +42,45 @@ const MedicalDetailsTable: React.FC<Props> = ({ entries, onEntryChange, onAddRow
           <h2 className="text-xl font-bold">醫療費用明細計算表</h2>
         </div>
         <div className="text-right">
-          <p className="text-slate-300 text-xs uppercase tracking-wider mb-1">目前總計</p>
-          <p className="text-2xl font-black text-blue-200">NT$ {total.toLocaleString()}</p>
+          <p className="text-white/70 text-xs uppercase tracking-wider mb-1">目前總計</p>
+          <p className="text-2xl font-black text-[var(--color-brand-secondary)]">NT$ {total.toLocaleString()}</p>
         </div>
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
           <thead>
-            <tr className="bg-slate-50 border-b border-slate-200">
-              <th className="px-6 py-4 text-left text-sm font-bold text-slate-600 w-16">序號</th>
-              <th className="px-6 py-4 text-left text-sm font-bold text-slate-600">就醫日期</th>
-              <th className="px-6 py-4 text-right text-sm font-bold text-slate-600">就醫金額 (NT$)</th>
-              <th className="px-6 py-4 text-center text-sm font-bold text-slate-600 w-24">操作</th>
+            <tr className="bg-[var(--color-brand-surface)] border-b border-[var(--color-brand-border)]">
+              <th className="px-6 py-4 text-left text-sm font-bold text-[var(--color-brand-muted)] w-16">序號</th>
+              <th className="px-6 py-4 text-left text-sm font-bold text-[var(--color-brand-muted)]">就醫日期</th>
+              <th className="px-6 py-4 text-right text-sm font-bold text-[var(--color-brand-muted)]">就醫金額 (NT$)</th>
+              <th className="px-6 py-4 text-center text-sm font-bold text-[var(--color-brand-muted)] w-24">操作</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className="divide-y divide-[var(--color-brand-border)]">
             {entries.map((entry, index) => {
               const amountInvalid = entry.amount < 0;
               const dateMissing = entry.amount > 0 && !entry.date;
 
               return (
-                <tr key={entry.id} className={`hover:bg-blue-50/30 transition-colors ${(amountInvalid || dateMissing) ? 'bg-amber-50/30' : ''}`}>
-                  <td className="px-6 py-4 text-slate-400 text-sm font-medium">{index + 1}</td>
+                <tr key={entry.id} className={`hover:bg-[var(--color-brand-surface)] transition-colors ${(amountInvalid || dateMissing) ? 'bg-amber-50/50' : ''}`}>
+                  <td className="px-6 py-4 text-[var(--color-brand-muted)] text-sm font-medium">{index + 1}</td>
                   <td className="px-6 py-4">
                     <div className="flex flex-col gap-1">
                       <div className="relative group/date flex items-center">
                         <button
                           type="button"
                           onClick={() => handleDateIconClick(entry.id)}
-                          className={`absolute left-0 pl-3 flex items-center h-full z-10 transition-colors ${dateMissing ? 'text-amber-600' : 'text-blue-500 hover:text-blue-700'}`}
+                          className={`absolute left-0 pl-3 flex items-center h-full z-10 transition-colors ${dateMissing ? 'text-amber-600' : 'text-[var(--color-brand-secondary)] hover:text-[var(--color-brand-primary)]'}`}
                         >
                           <Calendar size={18} />
                         </button>
                         <input
                           id={`date-input-${entry.id}`}
                           type="date"
-                          className={`w-full border rounded-lg pl-11 pr-3 py-2 text-slate-700 focus:outline-none transition-all cursor-pointer shadow-sm ${dateMissing
+                          className={`w-full border rounded-lg pl-11 pr-3 py-2 text-[var(--color-brand-primary)] focus:outline-none transition-all cursor-pointer shadow-sm ${dateMissing
                             ? 'border-amber-300 bg-amber-50 focus:ring-2 focus:ring-amber-500'
-                            : 'bg-white border-slate-200 focus:ring-2 focus:ring-blue-500 hover:border-slate-300'
+                            : 'bg-white border-[var(--color-brand-border)] focus:ring-2 focus:ring-[var(--color-brand-secondary)] hover:border-[var(--color-brand-muted)]'
                             }`}
                           value={entry.date}
                           onChange={(e) => onEntryChange(entry.id, 'date', e.target.value)}
@@ -101,7 +101,7 @@ const MedicalDetailsTable: React.FC<Props> = ({ entries, onEntryChange, onAddRow
                         placeholder="0"
                         className={`w-full border rounded-lg px-4 py-2 text-right font-medium shadow-sm transition-all focus:outline-none ${amountInvalid
                           ? 'border-amber-300 bg-amber-50 text-amber-800 focus:ring-2 focus:ring-amber-500'
-                          : 'bg-white border-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500 hover:border-slate-300'
+                          : 'bg-white border-[var(--color-brand-border)] text-[var(--color-brand-primary)] focus:ring-2 focus:ring-[var(--color-brand-secondary)] hover:border-[var(--color-brand-muted)]'
                           }`}
                         value={entry.amount || ''}
                         onChange={(e) => onEntryChange(entry.id, 'amount', parseFloat(e.target.value) || 0)}
@@ -129,16 +129,16 @@ const MedicalDetailsTable: React.FC<Props> = ({ entries, onEntryChange, onAddRow
         </table>
       </div>
 
-      <div className="p-6 bg-slate-50 border-t border-slate-200 flex justify-between items-center">
+      <div className="p-6 bg-[var(--color-brand-surface)] border-t border-[var(--color-brand-border)] flex justify-between items-center">
         <button
           onClick={onAddRow}
-          className="flex items-center gap-2 bg-blue-50 text-blue-600 hover:bg-blue-100 px-4 py-2 rounded-lg font-bold transition-all border border-blue-200 shadow-sm"
+          className="flex items-center gap-2 bg-[var(--color-brand-card)] text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-surface)] px-4 py-2 rounded-lg font-bold transition-all border border-[var(--color-brand-border)] shadow-sm"
         >
           <Plus size={20} /> 新增欄位
         </button>
         <button
           onClick={onBack}
-          className="bg-slate-800 text-white px-8 py-2.5 rounded-lg font-bold hover:bg-slate-900 transition-all shadow-md active:scale-95"
+          className="bg-[var(--color-brand-primary)] text-white px-8 py-2.5 rounded-lg font-bold hover:bg-black transition-all shadow-md active:scale-95"
         >
           完成並返回一覽表
         </button>
