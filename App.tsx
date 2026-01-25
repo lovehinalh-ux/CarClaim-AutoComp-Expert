@@ -154,30 +154,30 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen pb-40 bg-[var(--color-brand-surface)] text-[var(--color-brand-primary)]">
+    <div className="min-h-screen pb-40 bg-[var(--color-brand-background)] text-[var(--color-brand-secondary)]">
       <SEO />
       <div className="no-print">
         <Header />
       </div>
 
       <main className="max-w-4xl mx-auto px-6 md:px-8 py-8">
-        {/* Navigation Tabs (Swiss Style) */}
-        <div className="flex bg-[var(--color-brand-border)]/30 p-1.5 rounded-2xl mb-10 no-print border border-[var(--color-brand-border)]">
+        {/* Navigation Tabs (Swiss Style Refined) */}
+        <div className="flex bg-[var(--color-brand-surface)] p-1.5 rounded-2xl mb-10 no-print border border-[var(--color-brand-border)]">
           <button
             onClick={() => navigateTo('summary')}
-            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'summary' ? 'bg-[var(--color-brand-surface)] shadow-sm text-[var(--color-brand-secondary)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-surface)]/50'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'summary' ? 'bg-[var(--color-brand-background)] border border-[var(--color-brand-border)] text-[var(--color-brand-secondary)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)]'}`}
           >
             <ClipboardList size={20} /> 求償一覽表
           </button>
           <button
             onClick={() => navigateTo('medical')}
-            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'medical' ? 'bg-[var(--color-brand-surface)] shadow-sm text-[var(--color-brand-primary)] border border-[var(--color-brand-border)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-surface)]/50'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'medical' ? 'bg-[var(--color-brand-background)] border border-[var(--color-brand-border)] text-[var(--color-brand-secondary)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)]'}`}
           >
             <Stethoscope size={20} /> 醫療明細
           </button>
           <button
             onClick={() => navigateTo('preview')}
-            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'preview' ? 'bg-[var(--color-brand-surface)] shadow-sm text-[var(--color-brand-secondary)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-surface)]/50'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all text-lg ${viewMode === 'preview' ? 'bg-[var(--color-brand-background)] border border-[var(--color-brand-border)] text-[var(--color-brand-secondary)]' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)]'}`}
           >
             <Eye size={20} /> 預覽輸出
           </button>
@@ -185,61 +185,63 @@ const App: React.FC = () => {
 
         {viewMode === 'summary' && (
           <div className="space-y-10 animate-in fade-in duration-500">
-            {/* Action Bar */}
-            <div className="flex justify-between items-center no-print border-b border-[var(--color-brand-border)] pb-4">
-              <h2 className="text-3xl font-black text-[var(--color-brand-primary)] flex items-center gap-3 tracking-tight">
-                <User size={28} className="text-[var(--color-brand-primary)]" /> 基本資訊
-              </h2>
-              <button
-                onClick={handleReset}
-                className="flex items-center gap-2 px-5 py-2.5 text-[var(--color-brand-muted)] hover:bg-[var(--color-brand-surface)] rounded-xl transition-colors font-bold border border-[var(--color-brand-border)]"
-              >
-                <Trash2 size={18} /> 清除重填
-              </button>
-            </div>
+            {/* Basic Info Section */}
+            <section className="bg-[var(--color-brand-surface)] rounded-2xl border border-[var(--color-brand-border)] shadow-sm overflow-hidden no-print">
+              <div className="px-8 py-5 border-b border-[var(--color-brand-border)] flex justify-between items-center">
+                <h2 className="text-xl font-bold text-[var(--color-brand-secondary)] flex items-center gap-3">
+                  <User size={24} className="text-[var(--color-brand-primary)]" /> 基本資訊
+                </h2>
+                <button
+                  onClick={handleReset}
+                  className="flex items-center gap-2 px-4 py-2 text-sm font-bold text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] rounded-lg border border-[var(--color-brand-border)] transition-all"
+                >
+                  <Trash2 size={16} /> 清除重填
+                </button>
+              </div>
 
-            {/* Basic Info Card */}
-            <div className="bg-white rounded-3xl shadow-sm border border-stone-100 p-8 flex flex-col md:flex-row gap-8">
-              <div className="flex-1 space-y-3">
-                <label className={`flex items-center gap-2 text-base font-bold ${errors.claimantName ? 'text-amber-700' : 'text-stone-900'}`}>
-                  求償人姓名 <span className="text-amber-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="請輸入姓名"
-                  className={`w-full border-2 rounded-xl px-5 py-4 focus:outline-none transition-all text-lg font-medium ${errors.claimantName ? 'border-amber-300 bg-amber-50 focus:border-amber-500' : 'border-[var(--color-brand-border)] focus:border-[var(--color-brand-secondary)] bg-[var(--color-brand-card)] focus:bg-white'}`}
-                  value={formState.claimantName}
-                  onChange={(e) => {
-                    setFormState(prev => ({ ...prev, claimantName: e.target.value }));
-                    if (e.target.value.trim()) setErrors(prev => ({ ...prev, claimantName: undefined }));
-                  }}
-                />
-                {errors.claimantName && (
-                  <p className="text-amber-700 text-sm flex items-center gap-1 font-bold">
-                    <AlertCircle size={14} /> {errors.claimantName}
-                  </p>
-                )}
+              <div className="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className={`bg-[var(--color-brand-background)] p-6 rounded-xl border transition-all ${errors.claimantName ? 'border-amber-300 ring-1 ring-amber-300' : 'border-[var(--color-brand-border)]'}`}>
+                  <label className="flex items-center gap-2 text-sm font-semibold text-[var(--color-brand-secondary)] mb-3">
+                    求償人姓名 <span className="text-[var(--color-brand-primary)]">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="請輸入姓名"
+                    className={`w-full bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-primary)]/20 focus:border-[var(--color-brand-primary)] transition-all text-[var(--color-brand-secondary)] placeholder-[var(--color-brand-muted)]/50 ${errors.claimantName ? 'border-amber-400 bg-amber-50' : ''}`}
+                    value={formState.claimantName}
+                    onChange={(e) => {
+                      setFormState(prev => ({ ...prev, claimantName: e.target.value }));
+                      if (e.target.value.trim()) setErrors(prev => ({ ...prev, claimantName: undefined }));
+                    }}
+                  />
+                  {errors.claimantName && (
+                    <p className="text-amber-700 text-xs mt-2 flex items-center gap-1 font-bold">
+                      <AlertCircle size={14} /> {errors.claimantName}
+                    </p>
+                  )}
+                </div>
+
+                <div className={`bg-[var(--color-brand-background)] p-6 rounded-xl border transition-all ${errors.accidentDate ? 'border-amber-300 ring-1 ring-amber-300' : 'border-[var(--color-brand-border)]'}`}>
+                  <label className="flex items-center gap-2 text-sm font-semibold text-[var(--color-brand-secondary)] mb-3">
+                    事故日期 <span className="text-[var(--color-brand-primary)]">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    className={`w-full bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-primary)]/20 focus:border-[var(--color-brand-primary)] transition-all text-[var(--color-brand-secondary)] ${errors.accidentDate ? 'border-amber-400 bg-amber-50' : ''}`}
+                    value={formState.accidentDate}
+                    onChange={(e) => {
+                      setFormState(prev => ({ ...prev, accidentDate: e.target.value }));
+                      if (e.target.value) setErrors(prev => ({ ...prev, accidentDate: undefined }));
+                    }}
+                  />
+                  {errors.accidentDate && (
+                    <p className="text-amber-700 text-xs mt-2 flex items-center gap-1 font-bold">
+                      <AlertCircle size={14} /> {errors.accidentDate}
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="flex-1 space-y-3">
-                <label className={`flex items-center gap-2 text-base font-bold ${errors.accidentDate ? 'text-amber-700' : 'text-stone-900'}`}>
-                  事故日期 <span className="text-amber-500">*</span>
-                </label>
-                <input
-                  type="date"
-                  className={`w-full border-2 rounded-xl px-5 py-4 focus:outline-none transition-all text-lg font-medium ${errors.accidentDate ? 'border-amber-300 bg-amber-50 focus:border-amber-500' : 'border-[var(--color-brand-border)] focus:border-[var(--color-brand-secondary)] bg-[var(--color-brand-card)] focus:bg-white'}`}
-                  value={formState.accidentDate}
-                  onChange={(e) => {
-                    setFormState(prev => ({ ...prev, accidentDate: e.target.value }));
-                    if (e.target.value) setErrors(prev => ({ ...prev, accidentDate: undefined }));
-                  }}
-                />
-                {errors.accidentDate && (
-                  <p className="text-amber-700 text-sm flex items-center gap-1 font-bold">
-                    <AlertCircle size={14} /> {errors.accidentDate}
-                  </p>
-                )}
-              </div>
-            </div>
+            </section>
 
             {/* Quick Actions */}
             <div className="flex justify-end no-print">
@@ -320,29 +322,30 @@ const App: React.FC = () => {
         `}</style>
       </main>
 
-      {/* Floating Bottom Bar (Friendly Light Theme) */}
-      <div className={`fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-stone-200 shadow-[0_-10px_40px_-5px_rgba(0,0,0,0.1)] p-4 md:p-6 z-40 no-print transition-all duration-500`}>
+      {/* Sticky Summary Bar (Warm Amber Redesign) */}
+      <div className="fixed bottom-0 left-0 right-0 bg-[var(--color-brand-surface)]/95 backdrop-blur-xl border-t border-[var(--color-brand-border)] shadow-[0_-4px_20px_-10px_rgba(0,0,0,0.1)] p-4 md:p-6 z-40 no-print transition-all duration-500">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-baseline gap-3 bg-stone-50 px-4 py-2 rounded-xl border border-stone-100 w-full md:w-auto justify-center md:justify-start">
-            <span className="text-stone-500 font-bold text-sm uppercase tracking-wide">
+          <div className="flex items-center gap-4 bg-[var(--color-brand-background)] px-6 py-3 rounded-2xl border border-[var(--color-brand-border)] w-full md:w-auto justify-center md:justify-start">
+            <span className="text-[var(--color-brand-muted)] font-bold text-sm uppercase tracking-wider">
               {viewMode === 'medical' ? '醫療總計' : '求償總額'}
             </span>
-            <span className={`text-3xl font-black tabular-nums tracking-tight ${viewMode === 'medical' ? 'text-blue-600' : 'text-stone-900'}`}>
-              NT$ {(viewMode === 'medical' ? medicalTotal : totalClaimAmount).toLocaleString()}
+            <span className="text-3xl font-black tabular-nums tracking-tighter text-[var(--color-brand-secondary)]">
+              <span className="text-sm font-bold mr-1 text-[var(--color-brand-muted)]/60">NT$</span>
+              {(viewMode === 'medical' ? medicalTotal : totalClaimAmount).toLocaleString()}
             </span>
           </div>
           <div className="flex gap-3 w-full md:w-auto">
             {viewMode === 'summary' ? (
               <button
                 onClick={() => navigateTo('preview')}
-                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[var(--color-brand-primary)] text-white px-6 py-3.5 rounded-xl font-bold text-lg transition-all hover:bg-black hover:scale-[1.02] active:scale-95 shadow-lg shadow-[var(--color-brand-muted)]/20"
+                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[var(--color-brand-primary)] text-white px-8 py-3.5 rounded-xl font-bold text-lg transition-all hover:opacity-90 active:scale-95 shadow-lg shadow-[var(--color-brand-primary)]/10"
               >
                 <Eye size={20} /> 預覽並輸出
               </button>
             ) : viewMode === 'medical' ? (
               <button
                 onClick={() => navigateTo('summary')}
-                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[var(--color-brand-primary)] text-white px-6 py-3.5 rounded-xl font-bold text-lg transition-all hover:bg-black hover:scale-[1.02] active:scale-95 shadow-lg shadow-[var(--color-brand-muted)]/20"
+                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[var(--color-brand-primary)] text-white px-8 py-3.5 rounded-xl font-bold text-lg transition-all hover:opacity-90 active:scale-95 shadow-lg shadow-[var(--color-brand-primary)]/10"
               >
                 完成計算
               </button>
@@ -350,13 +353,13 @@ const App: React.FC = () => {
               <div className="flex gap-3 w-full">
                 <button
                   onClick={() => navigateTo('summary')}
-                  className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-white border-2 border-stone-200 text-stone-600 hover:text-stone-900 hover:border-stone-900 px-5 py-3.5 rounded-xl font-bold transition-all"
+                  className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[var(--color-brand-background)] border border-[var(--color-brand-border)] text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:border-[var(--color-brand-secondary)] px-6 py-3.5 rounded-xl font-bold transition-all"
                 >
                   <ArrowLeft size={20} /> 修改
                 </button>
                 <button
                   onClick={handleExportPDF}
-                  className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-primary)] text-white px-8 py-3.5 rounded-xl font-bold text-lg transition-all hover:scale-[1.02] shadow-xl shadow-[var(--color-brand-secondary)]/20"
+                  className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-primary)] text-white px-10 py-3.5 rounded-xl font-bold text-lg transition-all active:scale-95 shadow-xl shadow-[var(--color-brand-secondary)]/10"
                 >
                   <Download size={20} /> 下載 PDF
                 </button>

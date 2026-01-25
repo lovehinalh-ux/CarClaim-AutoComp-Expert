@@ -57,10 +57,10 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
       {/* Loading Overlay */}
       {isGenerating && (
         <div className="fixed inset-0 bg-[var(--color-brand-secondary)]/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6 text-center">
-          <div className="bg-[var(--color-brand-surface)] p-8 rounded-3xl shadow-2xl max-w-sm w-full animate-in zoom-in-95">
+          <div className="bg-[var(--color-brand-surface)] p-8 rounded-3xl shadow-2xl max-w-sm w-full animate-in zoom-in-95 border border-[var(--color-brand-border)]">
             <Loader2 className="w-12 h-12 text-[var(--color-brand-primary)] animate-spin mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-stone-800 mb-2">正在產製專業 PDF</h3>
-            <p className="text-stone-500 text-sm leading-relaxed">
+            <h3 className="text-xl font-bold text-[var(--color-brand-secondary)] mb-2">正在產製專業 PDF</h3>
+            <p className="text-[var(--color-brand-muted)] text-sm leading-relaxed">
               請稍候，系統正在為您排版並優化文件畫質...<br />這可能需要幾秒鐘的時間。
             </p>
           </div>
@@ -70,11 +70,11 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
       <div className="flex items-center justify-between mb-6 no-print">
         <button
           onClick={onBack}
-          className="flex items-center gap-2 px-4 py-2 bg-[var(--color-brand-card)] border border-[var(--color-brand-border)] text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:border-[var(--color-brand-secondary)] rounded-xl font-bold transition-all shadow-sm"
+          className="flex items-center gap-2 px-4 py-2 bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] rounded-xl font-bold transition-all shadow-sm"
         >
-          <ArrowLeft size={20} /> 返回修改資料
+          <ArrowLeft size={18} /> 返回修改資料
         </button>
-        <div className="flex items-center gap-2 text-[var(--color-brand-secondary)] bg-[var(--color-brand-surface)] px-4 py-1.5 rounded-full text-sm font-bold border border-[var(--color-brand-border)]">
+        <div className="flex items-center gap-2 text-[var(--color-brand-muted)] bg-[var(--color-brand-surface)] px-4 py-1.5 rounded-full text-sm font-bold border border-[var(--color-brand-border)]">
           <FileText size={16} /> 您正在查看 PDF 預覽
         </div>
       </div>
@@ -144,10 +144,10 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
                     <tbody>
                       {activeCustomItems.map(item => (
                         <tr key={item.id}>
-                          <td className="border border-slate-300 px-4 py-2 text-slate-700">
+                          <td className="border border-[var(--color-brand-border)] px-4 py-2 text-[var(--color-brand-muted)]">
                             <p className="font-medium">{item.name || '（未命名項目）'}</p>
                           </td>
-                          <td className="border border-slate-300 px-4 py-2 text-right font-mono font-bold">
+                          <td className="border border-[var(--color-brand-border)] px-4 py-2 text-right font-mono font-bold">
                             {(item.amount || 0).toLocaleString()}
                           </td>
                         </tr>
@@ -226,14 +226,14 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
         <button
           onClick={onBack}
           disabled={isGenerating}
-          className="flex items-center justify-center gap-3 bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50 px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-md active:scale-95 disabled:opacity-50"
+          className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-sm active:scale-95 disabled:opacity-50"
         >
           <ArrowLeft size={24} /> 點擊返回修改內容
         </button>
         <button
           onClick={handleDownloadPDF}
           disabled={isGenerating}
-          className="flex items-center justify-center gap-3 bg-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-primary)] text-white px-10 py-4 rounded-2xl font-black text-xl shadow-2xl transform transition-all hover:scale-105 active:scale-95 shadow-[var(--color-brand-secondary)]/20 disabled:opacity-50"
+          className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-[var(--color-brand-primary)] hover:opacity-90 text-white px-10 py-4 rounded-2xl font-black text-xl shadow-2xl transition-all active:scale-95 shadow-[var(--color-brand-primary)]/10 disabled:opacity-50"
         >
           {isGenerating ? (
             <Loader2 className="animate-spin" size={24} />
@@ -245,7 +245,7 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
         <button
           onClick={onPrint}
           disabled={isGenerating}
-          className="flex items-center justify-center gap-3 bg-slate-800 hover:bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-lg active:scale-95 disabled:opacity-50"
+          className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-[var(--color-brand-secondary)] hover:opacity-90 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-lg active:scale-95 disabled:opacity-50"
         >
           <Printer size={24} /> 直接列印
         </button>

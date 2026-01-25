@@ -18,7 +18,7 @@ const ClaimCategorySection: React.FC<Props> = ({ category, items, onAmountChange
         <div className="w-1.5 h-6 bg-[var(--color-brand-primary)] rounded-full"></div>
         <h2 className="text-xl font-bold text-[var(--color-brand-secondary)] tracking-tight">{category}</h2>
       </div>
-      <div className="divide-y divide-stone-100">
+      <div className="divide-y divide-[var(--color-brand-border)]">
         {items.map((item) => {
           const hasError = errors && errors[item.id];
           return (
@@ -26,7 +26,7 @@ const ClaimCategorySection: React.FC<Props> = ({ category, items, onAmountChange
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <span className={`text-lg font-bold ${hasError ? 'text-amber-800' : 'text-[var(--color-brand-secondary)]'}`}>{item.name}</span>
+                    <span className={`text-lg font-semibold ${hasError ? 'text-amber-800' : 'text-[var(--color-brand-secondary)]'}`}>{item.name}</span>
                     <div className="group relative">
                       <HelpCircle size={18} className="text-[var(--color-brand-muted)]/50 hover:text-[var(--color-brand-secondary)] cursor-help transition-colors" />
                       <div className="absolute left-0 bottom-full mb-2 w-72 bg-stone-900 text-white text-sm rounded-xl p-4 opacity-0 group-hover:opacity-100 transition-all pointer-events-none z-10 shadow-xl leading-relaxed transform translate-y-2 group-hover:translate-y-0">
@@ -51,12 +51,12 @@ const ClaimCategorySection: React.FC<Props> = ({ category, items, onAmountChange
                   )}
                 </div>
                 <div className="flex flex-col items-end gap-2">
-                  <div className="flex items-center gap-3 w-full md:w-auto bg-[var(--color-brand-background)] rounded-xl p-1 border border-[var(--color-brand-border)] focus-within:border-[var(--color-brand-secondary)] focus-within:ring-1 focus-within:ring-[var(--color-brand-secondary)] transition-all">
+                  <div className="flex items-center gap-3 w-full md:w-auto bg-[var(--color-brand-surface)] rounded-xl p-1 border border-[var(--color-brand-border)] focus-within:border-[var(--color-brand-primary)] focus-within:ring-1 focus-within:ring-[var(--color-brand-primary)] transition-all">
                     <span className={`pl-4 font-bold text-lg ${hasError ? 'text-amber-600' : 'text-[var(--color-brand-muted)]'}`}>NT$</span>
                     <input
                       type="number"
                       min="0"
-                      className={`w-full md:w-40 bg-transparent px-4 py-2 text-right font-bold text-xl md:text-2xl focus:outline-none placeholder-[var(--color-brand-border)] ${hasError
+                      className={`w-full md:w-40 bg-transparent px-4 py-2 text-right font-bold text-xl md:text-2xl focus:outline-none placeholder-[var(--color-brand-muted)]/30 ${hasError
                         ? 'text-amber-800'
                         : 'text-[var(--color-brand-secondary)]'
                         }`}

@@ -45,7 +45,7 @@ const PreviewLanding: React.FC<Props> = ({ onStart }) => {
               </div>
             </div>
             <div className="flex gap-4 p-6 rounded-3xl bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] items-start group hover:border-[var(--color-brand-primary)] hover:shadow-lg transition-all duration-300">
-              <div className="bg-[var(--color-brand-background)] p-3 rounded-xl text-[var(--color-brand-secondary)] shrink-0 border border-[var(--color-brand-border)] shadow-sm group-hover:scale-110 transition-transform">
+              <div className="bg-[var(--color-brand-background)] p-3 rounded-xl text-[var(--color-brand-primary)] shrink-0 border border-[var(--color-brand-border)] shadow-sm group-hover:scale-110 transition-transform">
                 <ShieldCheck size={24} />
               </div>
               <div>
@@ -57,16 +57,16 @@ const PreviewLanding: React.FC<Props> = ({ onStart }) => {
 
           <div className="space-y-4 mb-10 pl-2">
             <div className="flex items-center gap-3 text-[var(--color-brand-secondary)] group">
-              <CheckCircle2 size={22} className="text-emerald-500 fill-emerald-50" />
+              <CheckCircle2 size={22} className="text-[var(--color-brand-primary)]" />
               <span className="font-bold text-lg">符合實務常見請求項目分類</span>
             </div>
             <div className="flex items-center gap-3 text-[var(--color-brand-secondary)] group">
-              <CheckCircle2 size={22} className="text-emerald-500 fill-emerald-50" />
+              <CheckCircle2 size={22} className="text-[var(--color-brand-primary)]" />
               <span className="font-bold text-lg">附帶詳細醫療費用計算功能</span>
             </div>
-            <div className="flex items-center gap-3 text-[var(--color-brand-secondary)] group">
+            <div className="flex items-center gap-3 text-[var(--color-brand-muted)] group">
               <ShieldCheck size={22} className="text-[var(--color-brand-muted)]/50" />
-              <span className="font-medium text-[var(--color-brand-muted)]">隱私安全：所有計算均在本地完成，不儲存資料</span>
+              <span className="font-medium">隱私安全：所有計算均在本地完成，不儲存資料</span>
             </div>
           </div>
 
