@@ -13,9 +13,10 @@ interface Props {
   medicalEntries: any[]; // Or use MedicalEntry type if imported
   onBack: () => void;
   onPrint: () => void;
+  hideControls?: boolean;
 }
 
-const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, customItems, totalAmount, medicalEntries, onBack, onPrint }) => {
+const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, customItems, totalAmount, medicalEntries, onBack, onPrint, hideControls }) => {
   const pdfRef = useRef<HTMLDivElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -67,17 +68,19 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
         </div>
       )}
 
-      <div className="flex items-center justify-between mb-6 no-print">
-        <button
-          onClick={onBack}
-          className="flex items-center gap-2 px-4 py-2 bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] rounded-xl font-bold transition-all shadow-sm"
-        >
-          <ArrowLeft size={18} /> 返回修改資料
-        </button>
-        <div className="flex items-center gap-2 text-[var(--color-brand-muted)] bg-[var(--color-brand-surface)] px-4 py-1.5 rounded-full text-sm font-bold border border-[var(--color-brand-border)]">
-          <FileText size={16} /> 您正在查看 PDF 預覽
+      {!hideControls && (
+        <div className="flex items-center justify-between mb-6 no-print">
+          <button
+            onClick={onBack}
+            className="flex items-center gap-2 px-4 py-2 bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] rounded-xl font-bold transition-all shadow-sm"
+          >
+            <ArrowLeft size={18} /> 返回修改資料
+          </button>
+          <div className="flex items-center gap-2 text-[var(--color-brand-muted)] bg-[var(--color-brand-surface)] px-4 py-1.5 rounded-full text-sm font-bold border border-[var(--color-brand-border)]">
+            <FileText size={16} /> 您正在查看 PDF 預覽
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Document Sheet - This is what gets captured */}
       <div
@@ -222,34 +225,36 @@ const PDFPreview: React.FC<Props> = ({ claimantName, accidentDate, items, custom
         )}
       </div>
 
-      <div className="mt-12 flex flex-col md:flex-row justify-center gap-6 no-print">
-        <button
-          onClick={onBack}
-          disabled={isGenerating}
-          className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-sm active:scale-95 disabled:opacity-50"
-        >
-          <ArrowLeft size={24} /> 點擊返回修改內容
-        </button>
-        <button
-          onClick={handleDownloadPDF}
-          disabled={isGenerating}
-          className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-[var(--color-brand-primary)] hover:opacity-90 text-white px-10 py-4 rounded-2xl font-black text-xl shadow-2xl transition-all active:scale-95 shadow-[var(--color-brand-primary)]/10 disabled:opacity-50"
-        >
-          {isGenerating ? (
-            <Loader2 className="animate-spin" size={24} />
-          ) : (
-            <Download size={24} />
-          )}
-          一鍵產製專業 PDF
-        </button>
-        <button
-          onClick={onPrint}
-          disabled={isGenerating}
-          className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-[var(--color-brand-secondary)] hover:opacity-90 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-lg active:scale-95 disabled:opacity-50"
-        >
-          <Printer size={24} /> 直接列印
-        </button>
-      </div>
+      {!hideControls && (
+        <div className="mt-12 flex flex-col md:flex-row justify-center gap-6 no-print">
+          <button
+            onClick={onBack}
+            disabled={isGenerating}
+            className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-sm active:scale-95 disabled:opacity-50"
+          >
+            <ArrowLeft size={24} /> 點擊返回修改內容
+          </button>
+          <button
+            onClick={handleDownloadPDF}
+            disabled={isGenerating}
+            className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-[var(--color-brand-primary)] hover:opacity-90 text-white px-10 py-4 rounded-2xl font-black text-xl shadow-2xl transition-all active:scale-95 shadow-[var(--color-brand-primary)]/10 disabled:opacity-50"
+          >
+            {isGenerating ? (
+              <Loader2 className="animate-spin" size={24} />
+            ) : (
+              <Download size={24} />
+            )}
+            一鍵產製專業 PDF
+          </button>
+          <button
+            onClick={onPrint}
+            disabled={isGenerating}
+            className="flex-1 md:flex-none flex items-center justify-center gap-3 bg-[var(--color-brand-secondary)] hover:opacity-90 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-lg active:scale-95 disabled:opacity-50"
+          >
+            <Printer size={24} /> 直接列印
+          </button>
+        </div>
+      )}
     </div>
   );
 };
