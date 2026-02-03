@@ -1,68 +1,43 @@
 import React from 'react';
+import { Home, ChevronDown, LayoutGrid } from 'lucide-react';
 
 const Header: React.FC = () => {
   return (
     <header className="h-16 bg-[var(--color-brand-surface)] border-b border-[var(--color-brand-border)] flex items-center justify-between px-4 md:px-6 shadow-sm sticky top-0 z-50 animate-in fade-in slide-in-from-top-2 duration-500">
       <div className="flex items-center gap-3">
         <div className="bg-[var(--color-brand-primary)] p-1.5 rounded-lg text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-5 h-5"
-          >
-            <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
-            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-            <path d="M12 11h4" />
-            <path d="M12 16h4" />
-            <path d="M8 11h.01" />
-            <path d="M8 16h.01" />
-          </svg>
+          <LayoutGrid size={20} />
         </div>
         <h1 className="text-lg md:text-xl font-bold text-[var(--color-brand-secondary)] tracking-tight">
           Mr. Three 保險工具箱 <span className="hidden md:inline text-[var(--color-brand-muted)] mx-2">|</span> <span className="hidden md:inline">車禍求償試算工具</span>
         </h1>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-6">
+        <div className="relative group">
+          <button className="flex items-center gap-1 text-sm font-bold text-[var(--color-brand-secondary)] hover:text-[var(--color-brand-primary)] transition-colors py-2 focus:outline-none">
+            工具庫
+            <ChevronDown size={14} />
+          </button>
+          {/* Dropdown menu */}
+          <div className="absolute right-0 mt-0 w-64 rounded-xl shadow-xl bg-white ring-1 ring-[#DED6CC] ring-opacity-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right z-50 top-full p-1">
+            <div className="py-1">
+              <a href="https://simple-insurance-check.zeabur.app/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] hover:text-[var(--color-brand-primary)] transition-colors rounded-lg mb-0.5">快速保險檢視器</a>
+              <a href="https://claimhelper.zeabur.app/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] hover:text-[var(--color-brand-primary)] transition-colors rounded-lg mb-0.5">保險理賠文件準備工具</a>
+              <a href="https://carclaim-autocomp.zeabur.app/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] hover:text-[var(--color-brand-primary)] transition-colors rounded-lg mb-0.5">車禍求償試算工具</a>
+              <a href="https://insurance-companies.zeabur.app/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] hover:text-[var(--color-brand-primary)] transition-colors rounded-lg">各家保險公司官網與理賠連結</a>
+            </div>
+          </div>
+        </div>
+
         <a
-          href="https://personal-intro-blue.zeabur.app/#tools"
-          className="flex items-center gap-2 text-[var(--color-brand-secondary)] hover:text-[var(--color-brand-primary)] transition-colors font-medium text-sm"
+          href="https://personal-intro-blue.zeabur.app/"
+          className="flex items-center gap-2 text-white bg-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-primary)] px-4 py-2 rounded-xl transition-all font-bold text-sm shadow-sm"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-4 h-4"
-          >
-            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-            <polyline points="9 22 9 12 15 12 15 22" />
-          </svg>
+          <Home size={16} />
           <span className="hidden md:inline">回到首頁</span>
         </a>
-
-        <div className="hidden md:flex items-center gap-2 text-[var(--color-brand-secondary)] font-bold text-xs bg-white px-3 py-1.5 rounded-full border border-[var(--color-brand-border)]">
-          <div
-            className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-primary)]"
-            style={{ animation: 'pulse-light 2.8s ease-in-out infinite' }}
-          ></div>
-          SECURE & ONLINE
-        </div>
       </div>
-      <style>{`
-        @keyframes pulse-light {
-          0%, 100% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.06); opacity: 0.75; }
-        }
-      `}</style>
     </header>
   );
 };
