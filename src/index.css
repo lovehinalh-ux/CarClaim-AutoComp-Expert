@@ -2,13 +2,13 @@
 
 @layer base {
     :root {
-        /* Brand Colors - Strict Design Refinement */
-        --color-brand-background: #F5E6D3;
-        --color-brand-surface: #FFF9F0;
-        --color-brand-primary: #C97A2B;
-        --color-brand-secondary: #3A2A1E;
-        --color-brand-muted: #8A6F55;
-        --color-brand-border: #E6D5C3;
+        --color-brand-background: #F9F7F1;
+        --color-brand-surface:    #FEFCF8;
+        --color-brand-primary:    #9E741C;
+        --color-brand-secondary:  #182948;
+        --color-brand-muted:      #3E557D;
+        --color-brand-border:     #D0D7E8;
+        --color-navy:             #172D5B;
     }
 
     body {
@@ -19,50 +19,19 @@
         -webkit-font-smoothing: antialiased;
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: inherit;
-        font-weight: 700;
-    }
-
-    p,
-    input,
-    button,
-    label {
-        font-family: inherit;
-    }
+    h1, h2, h3, h4, h5, h6 { font-family: inherit; font-weight: 700; }
+    p, input, button, label  { font-family: inherit; }
 }
 
-/* Custom scrollbar for better aesthetics */
-::-webkit-scrollbar {
-    width: 8px;
-}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track  { background: #EFF3F8; }
+::-webkit-scrollbar-thumb  { background: #D0D7E8; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #3E557D; }
 
-::-webkit-scrollbar-track {
-    background: #f1f5f9;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-}
-
-/* PDF specific tweaks for html2pdf rendering */
-/* PDF specific tweaks for html2pdf rendering */
 .pdf-content {
     background: white;
     width: 210mm;
-    /* A4 width */
     min-height: 297mm;
-    /* A4 height */
     margin: 0 auto;
     font-size: 11px;
 }
