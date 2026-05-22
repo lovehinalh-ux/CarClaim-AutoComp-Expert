@@ -22,10 +22,10 @@ const Header: React.FC = () => {
           {/* Dropdown menu */}
           <div className="absolute right-0 mt-0 w-64 rounded-xl shadow-xl bg-white ring-1 ring-[#DED6CC] ring-opacity-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right z-50 top-full p-1">
             <div className="py-1">
-              <a href="https://simple-insurance-check.zeabur.app/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] hover:text-[var(--color-brand-primary)] transition-colors rounded-lg mb-0.5">快速保險檢視器</a>
-              <a href="https://claimhelper.zeabur.app/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] hover:text-[var(--color-brand-primary)] transition-colors rounded-lg mb-0.5">保險理賠文件準備工具</a>
-              <a href="https://carclaim-autocomp.zeabur.app/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] hover:text-[var(--color-brand-primary)] transition-colors rounded-lg mb-0.5">車禍求償試算工具</a>
-              <a href="https://insurance-companies.zeabur.app/" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 text-sm text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] hover:text-[var(--color-brand-primary)] transition-colors rounded-lg">各家保險公司官網與理賠連結</a>
+              <a href="https://insurance-checklist-new.zeabur.app/" className="block px-4 py-3 text-sm text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] hover:text-[var(--color-brand-primary)] transition-colors rounded-lg mb-0.5">快速保險檢視器</a>
+              <a href="https://claimhelper.zeabur.app/" className="block px-4 py-3 text-sm text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] hover:text-[var(--color-brand-primary)] transition-colors rounded-lg mb-0.5">保險理賠文件準備工具</a>
+              <a href="https://carclaim-autocomp-expert.zeabur.app/" className="block px-4 py-3 text-sm text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] hover:text-[var(--color-brand-primary)] transition-colors rounded-lg mb-0.5">車禍求償試算工具</a>
+              <a href="https://insurance-company-new.zeabur.app/" className="block px-4 py-3 text-sm text-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-background)] hover:text-[var(--color-brand-primary)] transition-colors rounded-lg">各家保險公司官網與理賠連結</a>
             </div>
           </div>
         </div>
