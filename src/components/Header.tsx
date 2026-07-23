@@ -5,10 +5,10 @@ const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const tools = [
-    { name: '保障健診工具', href: 'https://insurance-checklist-new.zeabur.app/' },
-    { name: '保險理賠文件彙整', href: 'https://claimhelper.zeabur.app/' },
-    { name: '車禍求償試算工具', href: 'https://carclaim-autocomp-expert.zeabur.app/' },
-    { name: '各家保險公司官網與理賠連結', href: 'https://insurance-company-new.zeabur.app/' },
+    { name: '保障健診工具', href: 'https://insurance-checklist.pages.dev/' },
+    { name: '保險理賠文件彙整', href: 'https://claimhelper.pages.dev/' },
+    { name: '車禍求償試算工具', href: 'https://carclaim-autocomp-expert.pages.dev/' },
+    { name: '各家保險公司官網與理賠連結', href: 'https://insurance-company-list.pages.dev/' },
   ];
 
   return (
@@ -31,7 +31,7 @@ const Header: React.FC = () => {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-6">
-            <a href="https://personal-intro-blue.zeabur.app/" className="text-sm text-white/80 hover:text-white transition-colors">← 回到工具箱</a>
+            <a href="https://personal-one-page-blue-pro-type.lovehinalh.workers.dev/" className="text-sm text-white/80 hover:text-white transition-colors">← 回到工具箱</a>
           </div>
 
           {/* Mobile toggle */}
@@ -52,7 +52,7 @@ const Header: React.FC = () => {
             </a>
           ))}
           <div className="pt-2 border-t border-white/10">
-            <a href="https://personal-intro-blue.zeabur.app/" className="block py-2.5 text-sm text-[var(--color-brand-primary)] font-medium">← 回到工具箱</a>
+            <a href="https://personal-one-page-blue-pro-type.lovehinalh.workers.dev/" className="block py-2.5 text-sm text-[var(--color-brand-primary)] font-medium">← 回到工具箱</a>
           </div>
         </div>
       )}
