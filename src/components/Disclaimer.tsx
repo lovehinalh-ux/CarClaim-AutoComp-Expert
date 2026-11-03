@@ -4,7 +4,7 @@ import { AlertTriangle } from 'lucide-react';
 
 const Disclaimer: React.FC = () => {
   return (
-    <div className="bg-[var(--color-brand-surface)] border-l-4 border-[var(--color-brand-secondary)] p-6 rounded-r-xl mb-12 shadow-sm border border-[var(--color-brand-border)]">
+    <div className="bg-[var(--color-brand-surface)] border-l-4 border-[var(--color-brand-secondary)] p-6 rounded-r-xl mb-12 shadow-xs border border-[var(--color-brand-border)]">
       <div className="flex items-start gap-4">
         <AlertTriangle className="text-[var(--color-brand-secondary)] shrink-0 mt-1" size={24} />
         <div>

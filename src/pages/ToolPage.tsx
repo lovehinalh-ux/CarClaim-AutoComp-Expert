@@ -1,54 +1,107 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import BasicInfoSection from '../components/BasicInfoSection';
 import ClaimCategorySection from '../components/ClaimCategorySection';
 import OtherItemsSection from '../components/OtherItemsSection';
+import FaultSection from '../components/FaultSection';
 import Disclaimer from '../components/Disclaimer';
 import MedicalDetailsTable from '../components/MedicalDetailsTable';
-
-import { CategoryType } from '../types';
-import { ClipboardList, Stethoscope, Eye, User, Trash2 } from 'lucide-react';
+import BottomBar from '../components/BottomBar';
 import SEO from '../components/SEO';
-import { useClaimContext } from '../context/ClaimContext';
+import { CategoryType } from '../types';
+import { ClipboardList, Stethoscope } from 'lucide-react';
+import { useClaimContext } from '../context/claimContextCore';
+import { medicalDateId, medicalRowId } from '../utils/domIds';
+
+type EditMode = 'summary' | 'medical';
+
+const tabClass = (active: boolean) =>
+    `flex-1 flex items-center justify-center gap-2 min-h-11 py-3 rounded-lg font-bold transition-all ${active ? 'bg-[var(--color-brand-primary)] text-white shadow-md' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-stone-50'}`;
+
+/** Router state PreviewPage sends when it bounces an incomplete form back here. */
+export interface ToolPageLocationState {
+    validate?: boolean;
+}
 
 const ToolPage: React.FC = () => {
     const navigate = useNavigate();
-    // Edit Mode State (Summary vs Medical)
-    const [editMode, setEditMode] = useState<'summary' | 'medical'>('summary');
+    const location = useLocation();
+    const [editMode, setEditMode] = useState<EditMode>('summary');
 
     const {
         formState,
-        setFormState,
-        errors,
         setErrors,
+        medicalError,
+        medicalTotal,
         totalClaimAmount,
+        netClaimAmount,
         handleAmountChange,
         handleMedicalEntryChange,
         handleAddMedicalRow,
         handleRemoveMedicalRow,
         handleCustomItemsUpdate,
+        handleFaultChange,
         handleReset,
-        validateBasicInfo
+        validateBasicInfo,
+        findMedicalRowMissingDate,
     } = useClaimContext();
 
     const categories = Object.values(CategoryType);
 
-    const handleGoToPreview = () => {
-        if (validateBasicInfo()) {
-            navigate('/preview');
-        } else {
-            // Find the first error and scroll to it if possible, or just alert
-            const firstError = document.querySelector('.text-red-500');
-            if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            else window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+    const switchMode = (mode: EditMode) => {
+        setEditMode(mode);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const onResetClick = () => {
-        if (handleReset()) {
-            setEditMode('summary');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+    const focusAfterRender = (fn: () => void) => window.setTimeout(fn, 60);
+
+    /** Shows errors and focuses the first problem; returns true when ready to preview. */
+    const validateAndFocus = (): boolean => {
+        const badRow = findMedicalRowMissingDate();
+        if (badRow) {
+            setErrors((p) => ({ ...p, medical: '有金額的明細都需要選擇就醫日期，請補上日期後再輸出。' }));
+            setEditMode('medical');
+            focusAfterRender(() => {
+                document.getElementById(medicalRowId(badRow))?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                document.getElementById(medicalDateId(badRow))?.focus({ preventScroll: true });
+            });
+            return false;
         }
+        if (validateBasicInfo()) return true;
+        setEditMode('summary');
+        focusAfterRender(() => {
+            const target = document.querySelector<HTMLInputElement>('[aria-invalid="true"]');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                target.focus({ preventScroll: true });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+        return false;
+    };
+
+    const handleGoToPreview = () => {
+        if (validateAndFocus()) navigate('/preview');
+    };
+
+    // Bounced back from /preview (reload, back/forward, direct link) with an
+    // incomplete form: run the same checks once, then drop the router state.
+    const validateRef = useRef(validateAndFocus);
+    useEffect(() => {
+        validateRef.current = validateAndFocus;
+    });
+    const bounced = Boolean((location.state as ToolPageLocationState | null)?.validate);
+    useEffect(() => {
+        if (!bounced) return;
+        navigate('.', { replace: true, state: null });
+        const id = window.setTimeout(() => validateRef.current(), 0);
+        return () => window.clearTimeout(id);
+    }, [bounced, navigate]);
+
+    const onResetClick = () => {
+        if (handleReset()) switchMode('summary');
     };
 
     return (
@@ -58,61 +111,33 @@ const ToolPage: React.FC = () => {
                 <Header />
             </div>
 
-            <main className="flex-1 w-full max-w-3xl mx-auto px-4 md:px-6 py-4 md:py-8 flex flex-col gap-6">
+            <main className="flex-1 w-full max-w-3xl mx-auto px-4 md:px-6 pb-4 md:pb-8 flex flex-col gap-4 md:gap-6">
 
-                {/* Editor Sub-Tabs */}
-                <div className="bg-white p-1.5 rounded-xl shadow-sm border border-stone-200 flex flex-shrink-0 sticky top-4 z-20">
-                    <button
-                        onClick={() => setEditMode('summary')}
-                        className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-bold transition-all ${editMode === 'summary' ? 'bg-[var(--color-brand-primary)] text-white shadow-md' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-stone-50'}`}
-                    >
-                        <ClipboardList size={18} /> 求償項目
-                    </button>
-                    <button
-                        onClick={() => setEditMode('medical')}
-                        className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-bold transition-all ${editMode === 'medical' ? 'bg-[var(--color-brand-primary)] text-white shadow-md' : 'text-[var(--color-brand-muted)] hover:text-[var(--color-brand-secondary)] hover:bg-stone-50'}`}
-                    >
-                        <Stethoscope size={18} /> 醫療明細
-                    </button>
+                {/* Sticky tabs sit on a page-colored band so scrolled content never peeks around them. */}
+                <div className="sticky top-0 z-30 -mx-4 md:-mx-6 px-4 md:px-6 pt-3 pb-2 md:pt-6 bg-[var(--color-brand-background)]">
+                    <div role="group" aria-label="編輯區塊" className="bg-white p-1.5 rounded-xl shadow-xs border border-stone-200 flex">
+                        <button type="button" aria-pressed={editMode === 'summary'} onClick={() => switchMode('summary')} className={tabClass(editMode === 'summary')}>
+                            <ClipboardList size={18} aria-hidden="true" /> 求償項目
+                        </button>
+                        <button type="button" aria-pressed={editMode === 'medical'} onClick={() => switchMode('medical')} className={tabClass(editMode === 'medical')}>
+                            <Stethoscope size={18} aria-hidden="true" /> 醫療明細
+                        </button>
+                    </div>
                 </div>
 
                 <div className="flex-1">
                     {editMode === 'summary' && (
-                        <div className="space-y-6 animate-in fade-in duration-300">
-                            {/* Basic Info */}
-                            <section className="bg-white rounded-2xl border border-stone-200 p-5 shadow-sm">
-                                <div className="flex justify-between items-center mb-4">
-                                    <h3 className="font-bold flex items-center gap-2"><User size={18} /> 基本資訊</h3>
-                                    <button onClick={onResetClick} className="text-xs text-stone-400 hover:text-red-500 flex items-center gap-1"><Trash2 size={12} /> 清除</button>
-                                </div>
-                                <div className="grid gap-4 md:grid-cols-2">
-                                    <div>
-                                        <label className="block text-xs font-bold text-stone-500 mb-1.5">姓名 <span className="text-red-500">*</span></label>
-                                        <input className={`w-full p-2.5 rounded-lg border ${errors.claimantName ? 'border-red-300 bg-red-50' : 'border-stone-200'}`} value={formState.claimantName} onChange={e => {
-                                            setFormState(p => ({ ...p, claimantName: e.target.value }));
-                                            if (e.target.value) setErrors(p => ({ ...p, claimantName: undefined }));
-                                        }} />
-                                        {errors.claimantName && <p className="text-red-500 text-xs mt-1">{errors.claimantName}</p>}
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-bold text-stone-500 mb-1.5">事故日期 <span className="text-red-500">*</span></label>
-                                        <input type="date" className={`w-full p-2.5 rounded-lg border ${errors.accidentDate ? 'border-red-300 bg-red-50' : 'border-stone-200'}`} value={formState.accidentDate} onChange={e => {
-                                            setFormState(p => ({ ...p, accidentDate: e.target.value }));
-                                            if (e.target.value) setErrors(p => ({ ...p, accidentDate: undefined }));
-                                        }} />
-                                        {errors.accidentDate && <p className="text-red-500 text-xs mt-1">{errors.accidentDate}</p>}
-                                    </div>
-                                </div>
-                            </section>
+                        <div className="space-y-6">
+                            <BasicInfoSection onReset={onResetClick} />
 
-                            {/* Categories */}
                             {categories.map((cat) => (
                                 <ClaimCategorySection
                                     key={cat}
                                     category={cat}
                                     items={formState.items.filter((item) => item.category === cat)}
                                     onAmountChange={handleAmountChange}
-                                    errors={errors.items}
+                                    medicalTotal={medicalTotal}
+                                    onOpenMedical={() => switchMode('medical')}
                                 />
                             ))}
 
@@ -121,43 +146,39 @@ const ToolPage: React.FC = () => {
                                 onUpdate={handleCustomItemsUpdate}
                             />
 
-                            <Disclaimer />
+                            <FaultSection
+                                faultPercent={formState.faultPercent}
+                                total={totalClaimAmount}
+                                net={netClaimAmount}
+                                onChange={handleFaultChange}
+                            />
 
+                            <Disclaimer />
                         </div>
                     )}
 
                     {editMode === 'medical' && (
-                        <div className="animate-in slide-in-from-right-4 duration-300">
-                            <MedicalDetailsTable
-                                entries={formState.medicalEntries}
-                                onEntryChange={handleMedicalEntryChange}
-                                onAddRow={handleAddMedicalRow}
-                                onRemoveRow={handleRemoveMedicalRow}
-                                onBack={() => setEditMode('summary')}
-                            />
-                        </div>
+                        <MedicalDetailsTable
+                            entries={formState.medicalEntries}
+                            onEntryChange={handleMedicalEntryChange}
+                            onAddRow={handleAddMedicalRow}
+                            onRemoveRow={handleRemoveMedicalRow}
+                            onBack={() => switchMode('summary')}
+                            error={medicalError}
+                        />
                     )}
                 </div>
-
             </main>
 
-            {/* Sticky Summary & Action Bar */}
-            <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-stone-200 shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] flex justify-between items-center z-50 safe-area-bottom">
-                <div className="flex flex-col">
-                    <div className="text-xs text-stone-500 font-bold">預估總額</div>
-                    <div className="text-2xl font-black text-[var(--color-brand-primary)] tabular-nums">NT$ {totalClaimAmount.toLocaleString()}</div>
-                </div>
-                <button
-                    onClick={handleGoToPreview}
-                    className="bg-[var(--color-brand-secondary)] hover:bg-[var(--color-brand-primary)] text-white px-8 py-3 rounded-xl font-bold text-base shadow-lg transition-all flex items-center gap-2"
-                >
-                    <Eye size={18} /> 預覽並輸出
-                </button>
-            </div>
+            <BottomBar
+                total={totalClaimAmount}
+                net={netClaimAmount}
+                faultPercent={formState.faultPercent}
+                onPreview={handleGoToPreview}
+            />
 
-            {/* Add padding to prevent content from being hidden by fixed footer */}
-            <div className="h-24"></div>
-
+            {/* Spacer so the fixed bar never covers the last content */}
+            <div className={formState.faultPercent > 0 ? 'h-32' : 'h-24'} aria-hidden="true"></div>
         </div>
     );
 };

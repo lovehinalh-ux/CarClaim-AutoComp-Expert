@@ -1,7 +1,11 @@
-
 export enum CategoryType {
   MEDICAL_AND_SALARY = '醫療、交通、薪資損害與撫慰金',
   PROPERTY_DAMAGE = '財產損失'
+}
+
+export interface ItemLink {
+  label: string;
+  href: string;
 }
 
 export interface ClaimItem {
@@ -11,6 +15,7 @@ export interface ClaimItem {
   amount: number;
   hint: string;
   description: string;
+  link?: ItemLink;
 }
 
 export interface MedicalEntry {
@@ -31,4 +36,6 @@ export interface FormState {
   items: ClaimItem[];
   medicalEntries: MedicalEntry[];
   customItems: CustomItem[];
+  /** 我方肇責比例 0–100；0 表示未填或無責任。 */
+  faultPercent: number;
 }
