@@ -8,13 +8,13 @@ interface Props {
 }
 
 const SEO: React.FC<Props> = ({
-    title = "車禍求償小幫手 - 2026 最新賠償試算與專家建議",
+    title = "車禍求償試算工具｜Mr. Three",
     description = "2026 最新車禍理賠試算工具，包含折舊損害與薪資損失計算。",
-    url = "https://car-claim.example.com",
+    url = "https://carclaim-autocomp-expert.pages.dev/",
     image = "https://img.icons8.com/fluency/240/calculator.png"
 }) => {
 
-    const formattedTitle = title.includes("車禍求償小幫手") ? title : `${title} | 車禍求償小幫手`;
+    const formattedTitle = title.includes("車禍求償試算工具") ? title : `${title}｜車禍求償試算工具`;
 
 
 
@@ -35,7 +35,7 @@ const SEO: React.FC<Props> = ({
                 "name": "車禍折舊率如何計算？",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "依據行政院固定資產耐用年数表，自用小客車耐用年數為 5 年，採用定率遞減法每年折舊 0.369。車齡超過 5 年者，零件部分僅剩殘值。"
+                    "text": "依據行政院固定資產耐用年數表，自用小客車耐用年數為 5 年，採用定率遞減法每年折舊 0.369。車齡超過 5 年者，零件部分僅剩殘值。"
                 }
             }
         ]

@@ -1,14 +1,64 @@
 @import "tailwindcss";
 
+/*
+ * Palette colors as sRGB hex (Tailwind v3 values, which the old CDN build rendered).
+ * Tailwind v4 defaults are oklch(), which html2canvas cannot parse, so the PDF
+ * export fails without these. Keep every palette shade the UI uses listed here.
+ */
+@theme {
+    --color-stone-50: #fafaf9;
+    --color-stone-100: #f5f5f4;
+    --color-stone-200: #e7e5e4;
+    --color-stone-300: #d6d3d1;
+    --color-stone-400: #a8a29e;
+    --color-stone-500: #78716c;
+    --color-stone-600: #57534e;
+    --color-stone-700: #44403c;
+    --color-stone-800: #292524;
+    --color-stone-900: #1c1917;
+    --color-slate-500: #64748b;
+    --color-gray-200: #e5e7eb;
+    --color-red-50: #fef2f2;
+    --color-red-200: #fecaca;
+    --color-red-300: #fca5a5;
+    --color-red-500: #ef4444;
+    --color-red-700: #b91c1c;
+    --color-amber-50: #fffbeb;
+    --color-amber-300: #fcd34d;
+    --color-amber-400: #fbbf24;
+    --color-amber-500: #f59e0b;
+    --color-amber-700: #b45309;
+    --color-amber-800: #92400e;
+    --color-green-100: #dcfce7;
+}
+
 @layer base {
     :root {
         --color-brand-background: #F9F7F1;
         --color-brand-surface:    #FEFCF8;
-        --color-brand-primary:    #9E741C;
+        /* Brass gold, darkened from #9E741C so white-on-gold and gold-on-cream both pass 4.5:1 */
+        --color-brand-primary:    #8C6618;
+        /* Lighter brass for gold text on navy surfaces (6.1:1 on #172D5B) */
+        --color-brand-gold-light: #D4A94E;
         --color-brand-secondary:  #182948;
         --color-brand-muted:      #3E557D;
         --color-brand-border:     #D0D7E8;
         --color-navy:             #172D5B;
+    }
+
+    /* Tailwind v3 defaults the CDN build used to provide; kept so visuals stay identical. */
+    *, ::after, ::before, ::backdrop, ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+    button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
+
+    input::placeholder, textarea::placeholder { color: #78716C; opacity: 1; }
+
+    ::selection { background: #EADBB8; color: var(--color-brand-secondary); }
+
+    :focus-visible {
+        outline: 2px solid var(--color-brand-primary);
+        outline-offset: 2px;
     }
 
     body {
@@ -34,4 +84,8 @@
     min-height: 297mm;
     margin: 0 auto;
     font-size: 11px;
+}
+
+@media print {
+    .no-print { display: none !important; }
 }
